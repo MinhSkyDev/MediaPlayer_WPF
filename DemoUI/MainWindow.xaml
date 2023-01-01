@@ -1,0 +1,160 @@
+﻿<Window x:Class="DemoUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Menu="clr-namespace:DemoUI.Utilities"
+        xmlns:vm="clr-namespace:DemoUI.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized" d:DesignHeight="718.474" d:DesignWidth="1229.448"  >
+    <Grid Background="#212529">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Background="#282B2F" Grid.Row="0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal"  Grid.Column="0">
+                    <Image Source="/Images/img_logo.png" Height="30" Margin="10" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Media Player" Style="{StaticResource Text_Style}" Margin="2" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,50,0">
+                    <TextBox x:Name="keywordTextBox"   Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" TextWrapping="WrapWithOverflow" Width="250" Height="35" Background="#393C40" BorderBrush="#0BCDFF"/>
+                    <Button x:Name="searchButton" Width="35" Height="35" BorderBrush="#0BCDFF" Background="#282B2F" Margin="0,5,0,5" Click="searchButton_Click">
+                        <Image Source="/Images/img_search2.png"/>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+            <Image Source="/Images/img_line.png"/>
+            <Grid Height="500">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" HorizontalAlignment="Left" Background="#282B2F">
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                  Command="{Binding HomeCommand}"
+                                  IsChecked="True">
+                        <Grid>
+
+                            <Image Source="Images/img_home.png"
+                                       Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Home"
+                                           Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                  Command="{Binding MusicLibraryCommand}"
+                                  >
+                        <Grid>
+
+                            <Image Source="Images/img_music_library.png"
+                                       Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Music Library"
+                                           Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                  Command="{Binding VideoLibraryCommand}"
+                                  >
+                        <Grid>
+
+                            <Image Source="Images/img_video_library.png"
+                                       Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Video Library"
+                                           Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                  Command="{Binding PlaylistCommand}"
+                                  >
+                        <Grid>
+
+                            <Image Source="Images/img_playlist.png"
+                                       Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Playlist"
+                                           Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
+                </StackPanel>
+                <Grid Grid.Column="1">
+
+                    <ContentControl 
+                                    Content="{Binding CurrentView}" />
+
+                </Grid>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" Background="#212529" VerticalAlignment="Center" >
+            <Grid Background="#212529">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="400"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Background="#212529" >
+                    <Button x:Name="mediaButton" BorderBrush="#212529" Click="Media_click" Margin="20,0,0,0" Background="#212529">
+                        <StackPanel Orientation="Horizontal" Background="#212529"  >
+                            <MediaElement MediaOpened="player_MediaOpened" MediaEnded="player_MediaEnded" LoadedBehavior="Manual" Name="player" Width="176" Height="108" Canvas.Left="70" Canvas.Top="39" VerticalAlignment="Top"/>
+                            <StackPanel Orientation="Vertical" Background="#212529" Width="165"   >
+                                <TextBlock   FontSize="20" Style="{StaticResource Text_Style}" VerticalAlignment="Top" Margin="20,0,0,0" Background="#212529">
+                                                <Run Text="{Binding currentMediaName}" FontWeight="Bold" />
+                                </TextBlock>
+                                <TextBlock  Text="Singer" FontSize="20" Style="{StaticResource Text_Style}" VerticalAlignment="Top" Margin="20,0,0,0" FontWeight="UltraLight" Background="#212529">
+                                                <Run Text="{Binding Singer}"  />
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1" >
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock  Grid.Column="0" x:Name="currentPosition" Text="{Binding mediaDuration}" Style="{StaticResource Text_Style}" d:Text="1:23" Margin="5"/>
+                            <Slider Grid.Column="1" x:Name="progressSlider" ValueChanged="progressSlider_ValueChanged"  Width="700" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="totalPosition" HorizontalAlignment="Right" Style="{StaticResource Text_Style}" d:Text="3:04" Text="0:00" Margin="5"/>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <Button x:Name="preButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="nextButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                            <Image Source="/Images/img_pre.png" Width="35" Height="35"></Image>
+                        </Button>
+                        <Button x:Name="playButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="playButton_Click"  HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Image Source="/Images/img_play.png" Width="35" Height="35"></Image>
+                        </Button>
+                        <Button x:Name="stopButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="stopButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                            <Image Source="/Images/img_pause.png" Width="35" Height="35"></Image>
+                        </Button>
+                        <Button x:Name="nextButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="nextButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                            <Image Source="/Images/img_next.png" Width="35" Height="35"></Image>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

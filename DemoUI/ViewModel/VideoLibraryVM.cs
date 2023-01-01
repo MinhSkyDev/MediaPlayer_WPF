@@ -1,0 +1,107 @@
+﻿using DemoUI.Model;
+using DemoUI.Utilities;
+using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+namespace DemoUI.ViewModel
+{
+    class VideoLibraryVM : INotifyPropertyChanged
+    {
+        private NavigationVM navigation;
+        public ICommand addVideo { get; }
+
+        public ICommand selectVideo { get; }
+
+        //Cặp event delegate này dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
+        public delegate void passData(Model.Video data);
+        public event passData passToNavigation;
+
+        //Implement get set here to invoke "Selection Change Event"
+        private object _selectedItem;
+        public object selectedItem { get {
+                return _selectedItem;
+            }
+            set
+            {
+                // Cài đặt hàm set cho selectedItem là vì selectedItem được binding với item được chọn trong ListView, '
+                // vì thế mỗi khi gọi hàm set là tương ứng với việc là item được chọn trong ListView vừa mới bị thay đổi
+                if (_selectedItem == value)
+                    return;
+                //Gán cho _selectedItem hiện tại, ép kiểu về Model.Video để xử lý
+                _selectedItem = value;
+                Model.Video currentVideo = (Model.Video)value;
+                title = currentVideo.name;
+
+                //Thay đổi xong thì truyền dữ liệu qua cho màn hình chính
+                passToNavigation?.Invoke(currentVideo);
+
+            }
+                }
+
+        public string title { get; set; }
+
+        public ObservableCollection<Model.Video> videos { get; set; }
+        public VideoLibraryVM(NavigationVM navigation) {
+
+            title = "Video";
+            addVideo = new RelayCommand(addVideo_button);
+            //selectVideo = new RelayCommand(selectVideo_button);
+            videos = new ObservableCollection<Model.Video>();
+            this.navigation = navigation;
+
+        }
+
+       
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        
+
+        private void addVideo_button(object obj)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string video_path_uri = "";
+
+
+            string VideoFormat = "Video files |*.wmv; *.3g2; *.3gp; *.3gp2; *.3gpp; *.amv; *.asf;  *.avi; *.bin; *.cue; *.divx; *.dv; *.flv; *.gxf; *.iso; *.m1v; *.m2v; *.m2t; *.m2ts; *.m4v; " +
+                          " *.mkv; *.mov; *.mp2; *.mp2v; *.mp4; *.mp4v; *.mpa; *.mpe; *.mpeg; *.mpeg1; *.mpeg2; *.mpeg4; *.mpg; *.mpv2; *.mts; *.nsv; *.nuv; *.ogg; *.ogm; *.ogv; *.ogx; *.ps; *.rec; *.rm; *.rmvb; *.tod; *.ts; *.tts; *.vob; *.vro; *.webm; *.dat; ";
+            openFileDialog.Filter = VideoFormat;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                video_path_uri = openFileDialog.FileName;
+            }
+            else
+            {
+                //do nothing
+            }
+
+            FileInfo videoInfo = new FileInfo(video_path_uri);
+            string video_name = videoInfo.Name;
+            Model.Video currentVideo = new Model.Video(videoInfo);
+
+            //Sau khi add file thì cần bắn qua bên navigation vì hiện tại giao diện đang binding với NavigationVM
+            videos.Add(currentVideo);
+            passToNavigation?.Invoke(currentVideo);
+
+        }
+
+        //private void selectVideo_button(object obj)
+        //{
+        //    //ListView current = View.VideoLibrary.
+        //    Model.Video currentVideo = (Model.Video)selectedItem;
+        //    title = currentVideo.name;
+        //}
+
+
+    }
+}

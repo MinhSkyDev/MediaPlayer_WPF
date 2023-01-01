@@ -1,0 +1,66 @@
+﻿<Window x:Class="DemoUI.FullScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoUI"
+        mc:Ignorable="d"
+        Title="Fullsreen" WindowState="Maximized" d:DesignHeight="718.474" d:DesignWidth="1229.448">
+    <Grid Background="#212529">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#282B2F">
+            <StackPanel Orientation="Horizontal" >
+                <Button Background="#282B2F" BorderBrush="#282B2F">
+                    <Image Source="/Images/img_back.png" Height="30"/>
+                </Button>
+                <Image Source="/Images/img_logo.png" Height="30" Margin="20,10,10,10" HorizontalAlignment="Left"/>
+                <TextBlock Text="Media Player" Style="{StaticResource Text_Style}" Margin="2" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Background="#212529" VerticalAlignment="Center" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button x:Name="preButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="nextButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Image Source="/Images/img_pre.png" Width="35" Height="35"></Image>
+                </Button>
+                <Button x:Name="playButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="playButton_Click"  HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Source="/Images/img_play.png" Width="35" Height="35"></Image>
+                </Button>
+                <Button x:Name="stopButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="stopButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Image Source="/Images/img_pause.png" Width="35" Height="35"></Image>
+                </Button>
+                <Button x:Name="nextButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0" Click="nextButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Image Source="/Images/img_next.png" Width="35" Height="35"></Image>
+                </Button>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock  Grid.Column="0" x:Name="currentPosition" Text="0:00" Style="{StaticResource Text_Style}" d:Text="1:23" Margin="5"/>
+                    <Slider Grid.Column="1" x:Name="progressSlider" ValueChanged="progressSlider_ValueChanged"  Width="1000" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" x:Name="totalPosition" HorizontalAlignment="Right" Style="{StaticResource Text_Style}" d:Text="3:04" Text="0:00" Margin="5"/>
+                </Grid>
+            </StackPanel>
+
+
+            <StackPanel  Background="#212529" >
+                <StackPanel Orientation="Vertical" Background="#212529" HorizontalAlignment="Center"  >
+                    <TextBlock  Text="Name" FontSize="30" Style="{StaticResource Text_Style}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,0,0,0" Background="#212529">
+                                                <Run Text="{Binding Path = Name}" FontWeight="Bold" />
+                    </TextBlock>
+                    <TextBlock  Text="Singer" FontSize="15" Style="{StaticResource Text_Style}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20,0,0,0" FontWeight="UltraLight" Background="#212529">
+                                                <Run Text="{Binding Path = Singer}"  />
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
