@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\tkhoa\Source\Repos\MediaPlayer_WPF\DemoUI\obj\Debug\
+C:\Users\tkhoa\Source\Repos\MediaPlayer_WPF\DemoUI\obj\Release\
 DemoUI
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\tkhoa\Source\Repos\MediaPlayer_WPF\DemoUI\App.xaml
 131683880514
 
