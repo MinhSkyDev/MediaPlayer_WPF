@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,24 @@ namespace DemoUI.View
         public MusicLibrary()
         {
             InitializeComponent();
+        }
+
+        private void AddMusic_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string music_path_uri = "";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                music_path_uri = openFileDialog.FileName;
+            }
+            else
+            {
+                //do nothing
+            }
+
+            FileInfo musicInfo = new FileInfo(music_path_uri);
+            string music_name = musicInfo.Name;
         }
     }
 }
