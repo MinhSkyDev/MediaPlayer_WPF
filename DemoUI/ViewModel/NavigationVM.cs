@@ -26,8 +26,6 @@ namespace DemoUI.ViewModel
         public string currentSinger { get; set; }
         public string mediaDuration { get; set; }
 
-        
-
 
         public ICommand HomeCommand { get; set; }
         public ICommand MusicLibraryCommand { get; set; }
@@ -44,7 +42,7 @@ namespace DemoUI.ViewModel
             prototype_view = new Dictionary<string, object>();
 
             prototype_view.Add("Home", new HomeVM());
-            prototype_view.Add("MusicLibrary", new MusicLibraryVM());
+            prototype_view.Add("MusicLibrary", new MusicLibraryVM(this));
             prototype_view.Add("Playlist", new PlaylistVM());
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
@@ -52,6 +50,9 @@ namespace DemoUI.ViewModel
             //Inject event here
             VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
             videoLibraryVM.passToNavigation += setInfoFromVideo;
+
+            MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
+            musicLibraryVM.passToNavigationMusic += setInfoFromMusic;
 
 
             HomeCommand = new RelayCommand(Home);
@@ -68,10 +69,12 @@ namespace DemoUI.ViewModel
             this.mediaDuration = video.duration;
         }
 
+        public void setInfoFromMusic(Music music)
+        {
+            this.currentMediaName = music.Name;
+            this.mediaDuration = music.Length;
+        }
+
 
     }
-
-
-   
-
 }

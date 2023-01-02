@@ -15,9 +15,9 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Music" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
-                <Button HorizontalAlignment="Right" Margin="0,5,60,0" Grid.Column="1" Width="110" Height="40" Background="#393C40" BorderBrush="#212529" >
-                    <StackPanel Orientation="Horizontal"  >
+                <TextBlock Name="MusicTitle" Grid.Column="0" Text="Music" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
+                <Button Name="AddMusic" Command="{Binding addMusic}" HorizontalAlignment="Right" Margin="0,5,60,0" Grid.Column="1" Width="110" Height="40" Background="#393C40" BorderBrush="#212529" >
+                    <StackPanel Orientation="Horizontal">
                         <Image Source="/Images/img_add.png" Width="25" Margin="0,0,0,0" />
                         <TextBlock Text="Add song" Style="{StaticResource Text_Style}" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
                     </StackPanel>
@@ -25,7 +25,7 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ListView Name="employeeList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+        <ListView Name="MusicList" ItemsSource="{Binding musics}" SelectedItem="{Binding selectedItemMusic}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       Background="#282B2F" BorderBrush="#282B2F">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>

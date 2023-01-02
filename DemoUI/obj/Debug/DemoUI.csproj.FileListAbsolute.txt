@@ -78,3 +78,53 @@ D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\bin\Debug\Mic
 D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.xml
 D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\DemoUI.csproj.CopyComplete
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\DemoUI.exe.config
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\DemoUI.exe
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\DemoUI.pdb
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.AssemblyReference.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.SuggestedBindingRedirects.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Button.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Image.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Page.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\TextBinding.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Text.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\FullScreen.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\MainWindow.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\Home.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\MusicLibrary.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\Playlist.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\UserControl1.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\VideoLibrary.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\App.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI_MarkupCompile.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI_MarkupCompile.lref
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\App.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\FullScreen.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\MainWindow.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Utilities\DataTemplate.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\Home.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\MusicLibrary.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\Playlist.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\UserControl1.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\VideoLibrary.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.g.resources
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.Properties.Resources.resources
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.GenerateResource.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.CoreCompileInputs.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.Fody.CopyLocal.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.Fody.RuntimeCopyLocal.cache
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.CopyComplete
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.exe
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.pdb
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\TagLibSharp.dll
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\TagLibSharp.pdb
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\bin\Debug\TagLibSharp.xml
+D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\bin\Debug\TagLibSharp.dll
+D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\bin\Debug\TagLibSharp.pdb
+D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\bin\Debug\TagLibSharp.xml
