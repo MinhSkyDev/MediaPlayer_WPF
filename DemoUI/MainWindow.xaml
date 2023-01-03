@@ -93,6 +93,20 @@
                         </Grid>
 
                     </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                  Command="{Binding PlayingCommand}"
+                                  >
+                        <Grid>
+
+                            <Image Source="Images/img_playlist.png"
+                                       Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Playing"
+                                           Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </Menu:Btn>
                 </StackPanel>
                 <Grid Grid.Column="1">
 

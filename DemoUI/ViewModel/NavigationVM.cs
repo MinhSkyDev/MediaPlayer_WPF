@@ -31,11 +31,13 @@ namespace DemoUI.ViewModel
         public ICommand MusicLibraryCommand { get; set; }
         public ICommand VideoLibraryCommand { get; set; }
         public ICommand PlaylistCommand { get; set; }
+        public ICommand PlayingCommand { get; set; }
 
         private void Home(object obj) => CurrentView = prototype_view["Home"];
         private void MusicLibrary(object obj) => CurrentView = prototype_view["MusicLibrary"];
         private void VideoLibrary(object obj) => CurrentView = prototype_view["VideoLibrary"];
         private void Playlist(object obj) => CurrentView = prototype_view["Playlist"];
+        private void Playing(object obj) => CurrentView = prototype_view["UserControl"];
         public NavigationVM()
         {
 
@@ -46,6 +48,7 @@ namespace DemoUI.ViewModel
             prototype_view.Add("Playlist", new PlaylistVM());
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
+
 
             //Inject event here
             VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
@@ -60,6 +63,7 @@ namespace DemoUI.ViewModel
             MusicLibraryCommand = new RelayCommand(MusicLibrary);
             VideoLibraryCommand = new RelayCommand(VideoLibrary);
             PlaylistCommand = new RelayCommand(Playlist);
+            PlayingCommand = new RelayCommand(Playing);
             // Startup Page
             CurrentView = prototype_view["Home"];
         }
