@@ -26,7 +26,9 @@ namespace DemoUI.ViewModel
         public delegate void passData(Model.Media data);
         public event passData passToNavigation;
 
-        //Cặp delegate event dùng để pass data qua màn 
+        //Cặp delegate event dùng để pass và navigate sang màn hình player
+        public delegate void NavigateToPlayer();
+        public event NavigateToPlayer navigateToPlayer;
 
 
         //Implement get set here to invoke "Selection Change Event"
@@ -73,7 +75,11 @@ namespace DemoUI.ViewModel
         private void doubleClickVideo_button(object obj)
         {
             Model.Video currentVideo = (Model.Video)selectedItem;
-            
+            //Chọn xong truyền dữ liệu qua màn hình chính trước
+            passToNavigation?.Invoke(currentVideo);
+            //Rồi sau đó invoke để chuyển màn hình sang MediaPlayer
+            navigateToPlayer?.Invoke();
+
 
 
         }

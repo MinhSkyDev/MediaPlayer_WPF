@@ -50,10 +50,11 @@ namespace DemoUI.ViewModel
             //Inject event here
             VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
             videoLibraryVM.passToNavigation += setInfoFromMedia;
+            videoLibraryVM.navigateToPlayer += navigateToMediaPlayer;
 
             MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
             musicLibraryVM.passToNavigationMusic += setInfoFromMedia;
-
+            musicLibraryVM.navigateToPlayer += navigateToMediaPlayer;
 
             HomeCommand = new RelayCommand(Home);
             MusicLibraryCommand = new RelayCommand(MusicLibrary);
@@ -74,7 +75,9 @@ namespace DemoUI.ViewModel
 
         public void navigateToMediaPlayer()
         {
-            CurrentView = prototype_view["UserControl"];
+            UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+            userControl.setData(currentMediaName, mediaDuration, currentUri);
+            CurrentView = userControl;
 
         }
 

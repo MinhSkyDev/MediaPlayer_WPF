@@ -25,6 +25,9 @@ namespace DemoUI.ViewModel
         public delegate void passDataMusic(Model.Media data);
         public event passDataMusic passToNavigationMusic;
 
+        public delegate void NavigateToPlayer();
+        public event NavigateToPlayer navigateToPlayer;
+
         //Implement get set here to invoke "Selection Change Event"
         private object _selectedItemMusic;
         public object selectedItemMusic
