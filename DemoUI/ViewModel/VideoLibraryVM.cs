@@ -19,11 +19,15 @@ namespace DemoUI.ViewModel
         private NavigationVM navigation;
         public ICommand addVideo { get; }
 
-        public ICommand selectVideo { get; }
+        public ICommand doubleClickVideo { get; set; }
+
 
         //Cặp event delegate này dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
-        public delegate void passData(Model.Video data);
+        public delegate void passData(Model.Media data);
         public event passData passToNavigation;
+
+        //Cặp delegate event dùng để pass data qua màn 
+
 
         //Implement get set here to invoke "Selection Change Event"
         private object _selectedItem;
@@ -54,6 +58,7 @@ namespace DemoUI.ViewModel
 
             title = "Video";
             addVideo = new RelayCommand(addVideo_button);
+            doubleClickVideo = new RelayCommand(doubleClickVideo_button);
             //selectVideo = new RelayCommand(selectVideo_button);
             videos = new ObservableCollection<Model.Video>();
             this.navigation = navigation;
@@ -64,7 +69,14 @@ namespace DemoUI.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        
+        //Hàm này dùng để bắt event doubleClick trên ListView Item, mục đích là để play video
+        private void doubleClickVideo_button(object obj)
+        {
+            Model.Video currentVideo = (Model.Video)selectedItem;
+            
+
+
+        }
 
         private void addVideo_button(object obj)
         {

@@ -49,7 +49,7 @@
                                     <Image Source="/Images/img_play2.png" Width="30"/>
                                 </Button>
                                 <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="20,15,0,0" >
-                                      <Run Text="{Binding Name}" FontSize="25" Style="{StaticResource TextBinding_Style}"  FontWeight="SemiBold"/>
+                                      <Run Text="{Binding name}" FontSize="25" Style="{StaticResource TextBinding_Style}"  FontWeight="SemiBold"/>
                                 </TextBlock>
                                 <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,15,0,0" >
                                           <Run Text="{Binding Singer}" FontSize="25" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
@@ -58,7 +58,7 @@
                                           <Run Text="{Binding Year}" FontSize="25" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
                                 </TextBlock>
                                 <TextBlock Grid.Column="4" HorizontalAlignment="Center" Margin="0,15,0,0" >
-                                          <Run Text="{Binding Length}" FontSize="25" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                          <Run Text="{Binding duration}" FontSize="25" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
                                 </TextBlock>
                             </Grid>
                         </StackPanel>

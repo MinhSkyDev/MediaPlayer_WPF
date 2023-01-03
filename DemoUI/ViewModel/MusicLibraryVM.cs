@@ -22,7 +22,7 @@ namespace DemoUI.ViewModel
         public ICommand selectMusic { get; }
 
         //Cặp event delegate dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
-        public delegate void passDataMusic(Model.Music data);
+        public delegate void passDataMusic(Model.Media data);
         public event passDataMusic passToNavigationMusic;
 
         //Implement get set here to invoke "Selection Change Event"

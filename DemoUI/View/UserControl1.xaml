@@ -7,7 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1620">
     <Grid Height="1080" Width="1620" Background="#282B2F">
-        <Border Margin="15,20,5,0">
+
+        <MediaElement Name="MediaPlayer" Width="1620" Height="1080" ></MediaElement>
+        
+        <!--<Border Margin="15,20,5,0">
             <StackPanel Height="250" Width="200" Background="#36393F"  >
                 <Border Width="170" Height="170" BorderBrush="#282B2F" Margin="0,5,0,0">
                     <Border.Background>
@@ -27,6 +30,6 @@
                     items
                 </TextBlock>
             </StackPanel>
-        </Border>
+        </Border>-->
     </Grid>
 </UserControl>

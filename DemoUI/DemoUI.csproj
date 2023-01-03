@@ -74,6 +74,7 @@
     <Compile Include="FullScreen.xaml.cs">
       <DependentUpon>FullScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Media.cs" />
     <Compile Include="Model\Music.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="Utilities\Btn.cs" />

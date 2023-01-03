@@ -23,7 +23,7 @@ namespace DemoUI.ViewModel
 
         //For basic data binding in the playback bars
         public string currentMediaName { get; set; }
-        public string currentSinger { get; set; }
+        public string currentUri { get; set; }
         public string mediaDuration { get; set; }
 
 
@@ -49,10 +49,10 @@ namespace DemoUI.ViewModel
 
             //Inject event here
             VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
-            videoLibraryVM.passToNavigation += setInfoFromVideo;
+            videoLibraryVM.passToNavigation += setInfoFromMedia;
 
             MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
-            musicLibraryVM.passToNavigationMusic += setInfoFromMusic;
+            musicLibraryVM.passToNavigationMusic += setInfoFromMedia;
 
 
             HomeCommand = new RelayCommand(Home);
@@ -63,16 +63,19 @@ namespace DemoUI.ViewModel
             CurrentView = prototype_view["Home"];
         }
 
-        public void setInfoFromVideo(Video video)
+        public void setInfoFromMedia(Media media)
         {
-            this.currentMediaName = video.name;
-            this.mediaDuration = video.duration;
+            this.currentMediaName = media.name;
+            this.mediaDuration = media.duration;
+            this.currentUri = media.uri;
         }
 
-        public void setInfoFromMusic(Music music)
+       
+
+        public void navigateToMediaPlayer()
         {
-            this.currentMediaName = music.Name;
-            this.mediaDuration = music.Length;
+            CurrentView = prototype_view["UserControl"];
+
         }
 
 

@@ -13,19 +13,19 @@ using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using System.Windows.Interop;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
+using System.Xml.Linq;
 
 namespace DemoUI.Model
 {
 
     // Đây là lớp để biểu thị thông tin của một video
-    public class Video : INotifyPropertyChanged
+    internal class Video : Media,INotifyPropertyChanged
     {
-        public string name { get; set; }
-        public string uri { get; set; }
+       
         public BitmapImage CoverPath { get; set; }
         public string singer { get; set; }
 
-        public string duration { get; set; }
+        
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,10 +68,9 @@ namespace DemoUI.Model
             return ConvertBitmapSourceToBitmapImage(i);
         }
 
-        public Video(FileInfo info) {
-            name = info.Name;
-            uri = info.Directory.FullName + @"\" + name;
-
+        public Video(FileInfo info) : base(info) {
+            
+            
             ShellFile shellFile = ShellFile.FromFilePath(uri);
             Bitmap bm = shellFile.Thumbnail.Bitmap;
 

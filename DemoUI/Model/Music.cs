@@ -16,29 +16,27 @@ using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
 namespace DemoUI.Model
 {
-    internal class Music : INotifyPropertyChanged
+    internal class Music : Media,INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string uri { get; set; }
+        
         public string Singer { get; set; }
         public string Year { get; set; }
-        public string Length { get; set; }
+       
 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Music() { }
 
-        public Music(FileInfo info)
+        public Music(FileInfo info) : base(info)
         {
-            Name = info.Name;
-            uri = info.Directory.FullName + @"\" + Name;
+            
 
             using (ShellObject shell = ShellObject.FromParsingName(uri))
             {
                 IShellProperty prop = shell.Properties.System.Media.Duration;
                 // Duration will be formatted as 00:44:08
-                Length = prop.FormatForDisplay(PropertyDescriptionFormatOptions.None);
+                duration = prop.FormatForDisplay(PropertyDescriptionFormatOptions.None);
             }
 
             var fileTag = TagLib.File.Create(info.FullName);
@@ -60,6 +58,11 @@ namespace DemoUI.Model
                 Year = year.ToString();
             }
 
+        }
+
+        public override string getType()
+        {
+            return "Music";
         }
     }
 }
