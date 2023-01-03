@@ -5,15 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DemoUI.View"
              mc:Ignorable="d"
-             Height="1080" Width="1620"
-             d:DesignHeight="1080" d:DesignWidth="1620">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{StaticResource Page_Style}"
+             >
     <StackPanel Orientation="Vertical">
         <TextBlock Text="{Binding name}" FontSize ="30" Style="{StaticResource Text_Style}" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
         <Canvas>
-        <MediaElement Name="MediaPlayer" Width="1000" Height="550" Source="{Binding uri}"
+
+            <ContentControl
+                Content="{Binding MEDIAPlayer}">
+                
+            </ContentControl>    
+        
+        <!--<MediaElement Name="MediaPlayer" Width="1000" Height="550" Source="{Binding uri}"
                       HorizontalAlignment="Left" VerticalAlignment="Top"
                       Stretch="UniformToFill"
-                      ></MediaElement>
+                      ></MediaElement>-->
         </Canvas>
     </StackPanel>
 

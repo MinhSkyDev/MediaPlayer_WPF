@@ -48,6 +48,7 @@ namespace DemoUI.ViewModel
             prototype_view.Add("Playlist", new PlaylistVM());
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
+            
 
 
             //Inject event here
