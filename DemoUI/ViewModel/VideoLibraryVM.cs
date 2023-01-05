@@ -45,13 +45,27 @@ namespace DemoUI.ViewModel
                 //Gán cho _selectedItem hiện tại, ép kiểu về Model.Video để xử lý
                 _selectedItem = value;
                 Model.Video currentVideo = (Model.Video)value;
-                title = currentVideo.name;
+                //title = currentVideo.name;
 
                 //Thay đổi xong thì truyền dữ liệu qua cho màn hình chính
                 passToNavigation?.Invoke(currentVideo);
 
             }
                 }
+
+        private int _selectedIndex;
+        public int selectedIndex { 
+            get
+            {
+                return _selectedIndex;
+            }
+            set
+            {
+                _selectedIndex = value;
+                title = _selectedIndex.ToString();
+            }
+        }  
+
 
         public string title { get; set; }
 
@@ -109,16 +123,43 @@ namespace DemoUI.ViewModel
 
             //Sau khi add file thì cần bắn qua bên navigation vì hiện tại giao diện đang binding với NavigationVM
             videos.Add(currentVideo);
+            selectedItem = videos[videos.Count() -1];
+            selectedIndex = videos.Count() - 1;
             passToNavigation?.Invoke(currentVideo);
 
         }
 
-        //private void selectVideo_button(object obj)
-        //{
-        //    //ListView current = View.VideoLibrary.
-        //    Model.Video currentVideo = (Model.Video)selectedItem;
-        //    title = currentVideo.name;
-        //}
+        internal Media getNextMedia()
+        {
+            Media result = null;
+
+            int currentListSize = videos.Count;
+            int nextIndex = selectedIndex + 1;
+            if(nextIndex < currentListSize)
+            {
+                result = videos[nextIndex];
+            }
+
+
+            return result;
+        }
+
+        internal Media getPreviousMedia()
+        {
+            Media result = null;
+
+            int currentListSize = videos.Count;
+            int previousIndex = selectedIndex - 1;
+            if (previousIndex >= 0)
+            {
+                result = videos[previousIndex];
+            }
+
+
+            return result;
+        }
+
+        
 
 
     }

@@ -62,9 +62,18 @@ namespace DemoUI.ViewModel
             mediaPlayer.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
             mediaPlayer.Play();
+            mediaPlayer.Stop();
         }
 
+        public void playVideo()
+        {           
+            mediaPlayer.Play();
+        }
 
+        public void pauseVideo()
+        {
+            mediaPlayer.Pause();
+        }
 
     }
 }

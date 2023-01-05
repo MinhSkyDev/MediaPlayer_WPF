@@ -89,6 +89,11 @@ namespace DemoUI.Model
 
         }
 
+        public override string getType()
+        {
+            return "VideoLibrary";
+        }
+
 
 
     }

@@ -25,6 +25,7 @@ namespace DemoUI.ViewModel
         public string currentMediaName { get; set; }
         public string currentUri { get; set; }
         public string mediaDuration { get; set; }
+        private Media currentMedia;
 
 
         public ICommand HomeCommand { get; set; }
@@ -32,6 +33,13 @@ namespace DemoUI.ViewModel
         public ICommand VideoLibraryCommand { get; set; }
         public ICommand PlaylistCommand { get; set; }
         public ICommand PlayingCommand { get; set; }
+
+
+        //ICommand cho Các thao tác với video
+        public ICommand playMediaButton { get; set; }
+        public ICommand pauseMediaButton { get; set; }
+        public ICommand nextMediaButton { get; set; }
+        public ICommand previousMediaButton { get; set; }
 
         private void Home(object obj) => CurrentView = prototype_view["Home"];
         private void MusicLibrary(object obj) => CurrentView = prototype_view["MusicLibrary"];
@@ -65,6 +73,10 @@ namespace DemoUI.ViewModel
             VideoLibraryCommand = new RelayCommand(VideoLibrary);
             PlaylistCommand = new RelayCommand(Playlist);
             PlayingCommand = new RelayCommand(Playing);
+            playMediaButton = new RelayCommand(playButton_command);
+            pauseMediaButton = new RelayCommand(pauseButton_command);
+            nextMediaButton = new RelayCommand(nextMedia_command);
+            previousMediaButton = new RelayCommand(previousMedia_command);
             // Startup Page
             CurrentView = prototype_view["Home"];
         }
@@ -74,18 +86,85 @@ namespace DemoUI.ViewModel
             this.currentMediaName = media.name;
             this.mediaDuration = media.duration;
             this.currentUri = media.uri;
+            this.currentMedia = media;
         }
 
        
-
+        /// <summary>
+        /// Bắn dữ liệu Media đang chơi hiện tại và chuyển view sang trình chơi Media
+        /// </summary>
         public void navigateToMediaPlayer()
         {
             UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
-            userControl.setData(currentMediaName, mediaDuration, currentUri);
+            userControl.setData(currentMedia.name, currentMedia.duration, currentMedia.uri);
             CurrentView = userControl;
 
         }
 
+        void playButton_command(Object obj)
+        {
+            UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+            userControl.playVideo();
+        }
+
+
+        void nextMedia_command(Object obj)
+        {
+            string type = currentMedia.getType();
+            if (type.Equals("VideoLibrary"))
+            {
+                VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
+                Media nextMedia = videoLibraryVM.getNextMedia();
+
+                if(nextMedia != null)
+                {
+                    currentMedia = nextMedia;
+                    videoLibraryVM.selectedIndex += 1;
+                    navigateToMediaPlayer();
+                }
+
+            }
+            else if(type.Equals("MusicLibrary")) 
+            {
+                
+            }
+            else
+            {
+                //Do nothing
+            }
+        }
+
+        void previousMedia_command(Object obj)
+        {
+            string type = currentMedia.getType();
+            if (type.Equals("VideoLibrary"))
+            {
+                VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
+                Media nextMedia = videoLibraryVM.getPreviousMedia();
+
+                if (nextMedia != null)
+                {
+                    currentMedia = nextMedia;
+                    videoLibraryVM.selectedIndex -= 1;
+                    navigateToMediaPlayer();
+                }
+
+            }
+            else if (type.Equals("MusicLibrary"))
+            {
+
+            }
+            else
+            {
+                //Do nothing
+            }
+        }
+
+        void pauseButton_command(Object obj)
+        {
+            UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+            userControl.pauseVideo();
+        }
 
     }
 }
