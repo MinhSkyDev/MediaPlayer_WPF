@@ -120,7 +120,7 @@ namespace DemoUI.ViewModel
                 {
                     currentMedia = nextMedia;
                     videoLibraryVM.selectedIndex += 1;
-                    navigateToMediaPlayer();
+                    navigateToMediaPlayer(); 
                 }
 
             }
