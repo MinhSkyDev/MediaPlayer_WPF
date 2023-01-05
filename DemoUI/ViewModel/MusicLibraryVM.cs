@@ -19,6 +19,8 @@ namespace DemoUI.ViewModel
         private NavigationVM navigation;
         public ICommand addMusic { get; }
 
+        public ICommand doubleClickMusic { get; set; }
+
         public ICommand selectMusic { get; }
 
         //Cặp event delegate dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
@@ -61,12 +63,24 @@ namespace DemoUI.ViewModel
 
             title = "Music";
             addMusic = new RelayCommand(addMusic_button);
+            doubleClickMusic = new RelayCommand(doubleClickMusic_button);
             musics = new ObservableCollection<Model.Music>();
             this.navigation = navigation;
 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
+        //Hàm này dùng để bắt event doubleClick trên ListView Item, mục đích là để play music
+        private void doubleClickMusic_button(object obj)
+        {
+            Model.Music currentMusic = (Model.Music)selectedItemMusic;
+            //Chọn xong truyền dữ liệu qua màn hình chính trước
+            passToNavigationMusic?.Invoke(currentMusic);
+            //Rồi sau đó invoke để chuyển màn hình sang MediaPlayer
+            navigateToPlayer?.Invoke();
+        }
 
         private void addMusic_button(object obj)
         {
@@ -95,7 +109,7 @@ namespace DemoUI.ViewModel
                 //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
                 musics.Add(currentMusic);
                 passToNavigationMusic?.Invoke(currentMusic);
-            }    
+            }
         }
 
 

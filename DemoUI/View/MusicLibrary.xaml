@@ -37,6 +37,9 @@
                 <DataTemplate>
                     <Border Margin="15,20,5,0">
                         <StackPanel Height="60" Width="1300" Background="#282B2F" HorizontalAlignment="Center">
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickMusic, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="50"></ColumnDefinition>
