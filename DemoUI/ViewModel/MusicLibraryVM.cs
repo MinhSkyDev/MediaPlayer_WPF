@@ -86,13 +86,16 @@ namespace DemoUI.ViewModel
                 //do nothing
             }
 
-            FileInfo musicInfo = new FileInfo(music_path_uri);
-            string music_name = musicInfo.Name;
-            Model.Music currentMusic = new Model.Music(musicInfo);
+            if (music_path_uri != "")
+            {
+                FileInfo musicInfo = new FileInfo(music_path_uri);
+                string music_name = musicInfo.Name;
+                Model.Music currentMusic = new Model.Music(musicInfo);
 
-            //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
-            musics.Add(currentMusic);
-            passToNavigationMusic?.Invoke(currentMusic);
+                //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                musics.Add(currentMusic);
+                passToNavigationMusic?.Invoke(currentMusic);
+            }    
         }
 
 

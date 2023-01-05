@@ -23,6 +23,7 @@ namespace DemoUI.ViewModel
 
         //For basic data binding in the playback bars
         public string currentMediaName { get; set; }
+        public string currentSinger { get; set; }
         public string currentUri { get; set; }
         public string mediaDuration { get; set; }
 
@@ -72,6 +73,14 @@ namespace DemoUI.ViewModel
         public void setInfoFromMedia(Media media)
         {
             this.currentMediaName = media.name;
+            if (media.getType() == "Music")
+            {
+                this.currentSinger = ((Music)media).Singer;
+            }
+            else
+            {
+                this.currentSinger = null;
+            }
             this.mediaDuration = media.duration;
             this.currentUri = media.uri;
         }

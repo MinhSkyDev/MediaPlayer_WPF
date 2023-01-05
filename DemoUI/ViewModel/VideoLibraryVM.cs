@@ -103,13 +103,16 @@ namespace DemoUI.ViewModel
                 //do nothing
             }
 
-            FileInfo videoInfo = new FileInfo(video_path_uri);
-            string video_name = videoInfo.Name;
-            Model.Video currentVideo = new Model.Video(videoInfo);
+            if (video_path_uri != "")
+            {
+                FileInfo videoInfo = new FileInfo(video_path_uri);
+                string video_name = videoInfo.Name;
+                Model.Video currentVideo = new Model.Video(videoInfo);
 
-            //Sau khi add file thì cần bắn qua bên navigation vì hiện tại giao diện đang binding với NavigationVM
-            videos.Add(currentVideo);
-            passToNavigation?.Invoke(currentVideo);
+                //Sau khi add file thì cần bắn qua bên navigation vì hiện tại giao diện đang binding với NavigationVM
+                videos.Add(currentVideo);
+                passToNavigation?.Invoke(currentVideo);
+            }
 
         }
 
