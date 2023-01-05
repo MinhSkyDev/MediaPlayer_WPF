@@ -117,50 +117,51 @@ namespace DemoUI.ViewModel
                 //do nothing
             }
 
-            FileInfo videoInfo = new FileInfo(video_path_uri);
-            string video_name = videoInfo.Name;
-            Model.Video currentVideo = new Model.Video(videoInfo);
+            if (video_path_uri != "")
+            {
+                FileInfo videoInfo = new FileInfo(video_path_uri);
+                string video_name = videoInfo.Name;
+                Model.Video currentVideo = new Model.Video(videoInfo);
 
-            //Sau khi add file thì cần bắn qua bên navigation vì hiện tại giao diện đang binding với NavigationVM
-            videos.Add(currentVideo);
-            selectedItem = videos[videos.Count() -1];
-            selectedIndex = videos.Count() - 1;
-            passToNavigation?.Invoke(currentVideo);
+                //Sau khi add file thì cần bắn qua bên navigation vì hiện tại giao diện đang binding với NavigationVM
+                videos.Add(currentVideo);
+                selectedItem = videos[videos.Count() - 1];
+                selectedIndex = videos.Count() - 1;
+                passToNavigation?.Invoke(currentVideo);
 
+            }
         }
 
-        internal Media getNextMedia()
-        {
-            Media result = null;
-
-            int currentListSize = videos.Count;
-            int nextIndex = selectedIndex + 1;
-            if(nextIndex < currentListSize)
+            public Media getNextMedia()
             {
-                result = videos[nextIndex];
+                Media result = null;
+
+                int currentListSize = videos.Count;
+                int nextIndex = selectedIndex + 1;
+                if (nextIndex < currentListSize)
+                {
+                    result = videos[nextIndex];
+                }
+
+
+                return result;
             }
 
-
-            return result;
-        }
-
-        internal Media getPreviousMedia()
-        {
-            Media result = null;
-
-            int currentListSize = videos.Count;
-            int previousIndex = selectedIndex - 1;
-            if (previousIndex >= 0)
+            public Media getPreviousMedia()
             {
-                result = videos[previousIndex];
+                Media result = null;
+
+                int currentListSize = videos.Count;
+                int previousIndex = selectedIndex - 1;
+                if (previousIndex >= 0)
+                {
+                    result = videos[previousIndex];
+                }
+
+
+                return result;
             }
-
-
-            return result;
-        }
-
         
-
 
     }
 }
