@@ -241,6 +241,14 @@
   <ItemGroup>
     <Resource Include="Images\img_back.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\img_playing.png" />
+    <Resource Include="Images\img_repeat.png" />
+    <Resource Include="Images\img_shuffle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\img_shuffle_music.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.6.4\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.4\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

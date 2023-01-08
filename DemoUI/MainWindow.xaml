@@ -98,7 +98,7 @@
                                   >
                         <Grid>
 
-                            <Image Source="Images/img_playlist.png"
+                            <Image Source="Images/img_playing.png"
                                        Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Playing"
@@ -154,6 +154,10 @@
                         </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <Button x:Name="shuffleButton" Width="45" Height="45" Command ="{Binding previousMediaButton}"
+                                BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                            <Image Source="/Images/img_shuffle.png" Width="35" Height="35"></Image>
+                        </Button>
                         <Button x:Name="preButton" Width="45" Height="45" Command ="{Binding previousMediaButton}"
                                 BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center" >
                             <Image Source="/Images/img_pre.png" Width="35" Height="35"></Image>
@@ -173,6 +177,11 @@
                                 Command ="{Binding nextMediaButton}"
                                 >
                             <Image Source="/Images/img_next.png" Width="35" Height="35"></Image>
+                        </Button>
+                        <Button x:Name="repeatButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                
+                                >
+                            <Image Source="/Images/img_repeat.png" Width="35" Height="35"></Image>
                         </Button>
                     </StackPanel>
                 </StackPanel>
