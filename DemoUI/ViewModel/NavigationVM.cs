@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DemoUI.Utilities;
 using System.Windows.Input;
 using DemoUI.Model;
+using DemoUI.View;
 
 namespace DemoUI.ViewModel
 {
@@ -126,12 +127,22 @@ namespace DemoUI.ViewModel
             }
             else if(type.Equals("MusicLibrary")) 
             {
-                
+                MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view[type];
+                Media nextMedia = musicLibraryVM.getNextMedia();
+
+                if (nextMedia != null)
+                {
+                    currentMedia = nextMedia;
+                    musicLibraryVM.selectedIndex += 1;
+                    navigateToMediaPlayer();
+                }
             }
             else
             {
                 //Do nothing
             }
+
+            this.setInfoFromMedia(currentMedia);
         }
 
         void previousMedia_command(Object obj)
@@ -140,11 +151,12 @@ namespace DemoUI.ViewModel
             if (type.Equals("VideoLibrary"))
             {
                 VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
-                Media nextMedia = videoLibraryVM.getPreviousMedia();
+                Media previousMedia = videoLibraryVM.getPreviousMedia();
 
-                if (nextMedia != null)
+                if (previousMedia != null)
                 {
-                    currentMedia = nextMedia;
+                    currentMedia = previousMedia;
+                    
                     videoLibraryVM.selectedIndex -= 1;
                     navigateToMediaPlayer();
                 }
@@ -152,12 +164,22 @@ namespace DemoUI.ViewModel
             }
             else if (type.Equals("MusicLibrary"))
             {
+                MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
+                Media previousMedia = musicLibraryVM.getPreviousMedia();
 
+                if (previousMedia != null)
+                {
+                    currentMedia = previousMedia;
+                    musicLibraryVM.selectedIndex -= 1;
+                    navigateToMediaPlayer();
+                }
             }
             else
             {
                 //Do nothing
             }
+
+            this.setInfoFromMedia(currentMedia);
         }
 
         void pauseButton_command(Object obj)
@@ -167,4 +189,24 @@ namespace DemoUI.ViewModel
         }
 
     }
+
+    public static class ShuffleExtension
+    {
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+    }
+
+
+
 }

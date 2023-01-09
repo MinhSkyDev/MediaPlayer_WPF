@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace DemoUI.ViewModel
 {
@@ -20,8 +21,8 @@ namespace DemoUI.ViewModel
         public ICommand addMusic { get; }
 
         public ICommand doubleClickMusic { get; set; }
-
         public ICommand selectMusic { get; }
+        public ICommand shuffleList { get; set; }
 
         //Cặp event delegate dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
         public delegate void passDataMusic(Model.Media data);
@@ -29,6 +30,11 @@ namespace DemoUI.ViewModel
 
         public delegate void NavigateToPlayer();
         public event NavigateToPlayer navigateToPlayer;
+
+
+        public int selectedIndex { get; set; }
+
+
 
         //Implement get set here to invoke "Selection Change Event"
         private object _selectedItemMusic;
@@ -64,6 +70,7 @@ namespace DemoUI.ViewModel
             title = "Music";
             addMusic = new RelayCommand(addMusic_button);
             doubleClickMusic = new RelayCommand(doubleClickMusic_button);
+            shuffleList = new RelayCommand(shuffleList_button);
             musics = new ObservableCollection<Model.Music>();
             this.navigation = navigation;
 
@@ -112,6 +119,44 @@ namespace DemoUI.ViewModel
             }
         }
 
+        public Model.Media getNextMedia()
+        {
+            Model.Media result = null;
+
+            int currentListSize = musics.Count;
+            int nextIndex = selectedIndex + 1;
+            if (nextIndex < currentListSize)
+            {
+                result = musics[nextIndex];
+            }
+
+
+            return result;
+        }
+
+        public Model.Media getPreviousMedia()
+        {
+            Model.Media result = null;
+
+            int currentListSize = musics.Count;
+            int previousIndex = selectedIndex - 1;
+            if (previousIndex >= 0)
+            {
+                result = musics[previousIndex];
+            }
+
+
+            return result;
+        }
+
+        private void shuffleList_button(object obj)
+        {
+            musics.Shuffle();
+        }
+
 
     }
+
+
+    
 }

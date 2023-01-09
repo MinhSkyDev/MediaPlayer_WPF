@@ -18,8 +18,8 @@ namespace DemoUI.ViewModel
     {
         private NavigationVM navigation;
         public ICommand addVideo { get; }
-
         public ICommand doubleClickVideo { get; set; }
+        public ICommand shuffleList { get; set; }
 
 
         //Cặp event delegate này dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
@@ -75,6 +75,7 @@ namespace DemoUI.ViewModel
             title = "Video";
             addVideo = new RelayCommand(addVideo_button);
             doubleClickVideo = new RelayCommand(doubleClickVideo_button);
+            shuffleList = new RelayCommand(shuffleList_button);
             //selectVideo = new RelayCommand(selectVideo_button);
             videos = new ObservableCollection<Model.Video>();
             this.navigation = navigation;
@@ -162,6 +163,11 @@ namespace DemoUI.ViewModel
                 return result;
             }
         
+
+        private void shuffleList_button(object obj)
+        {
+            videos.Shuffle();
+        }
 
     }
 }

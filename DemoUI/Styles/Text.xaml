@@ -11,7 +11,7 @@
         <Setter Property="HorizontalAlignment"
                 Value="Left" />
         <Setter Property="Foreground"
-                Value="#DBDBDB" />
+                Value="#FFFFFF" />
         <Setter Property="FontSize"
                 Value="18" />
         <Setter Property="Margin"
