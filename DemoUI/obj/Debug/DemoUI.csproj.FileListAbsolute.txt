@@ -175,3 +175,5 @@ D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.Fody.Runti
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.CopyComplete
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.exe
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.pdb
+D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\View\AddPlaylistWindow.g.cs
+D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\View\AddPlaylistWindow.baml

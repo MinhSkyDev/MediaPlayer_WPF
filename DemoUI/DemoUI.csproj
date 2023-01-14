@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Model\Media.cs" />
     <Compile Include="Model\Music.cs" />
+    <Compile Include="Model\Playlist.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
@@ -86,6 +87,9 @@
     <Compile Include="ViewModel\PlaylistVM.cs" />
     <Compile Include="ViewModel\UserControlVM.cs" />
     <Compile Include="ViewModel\VideoLibraryVM.cs" />
+    <Compile Include="View\AddPlaylistWindow.xaml.cs">
+      <DependentUpon>AddPlaylistWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -138,6 +142,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Utilities\DataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddPlaylistWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

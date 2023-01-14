@@ -65,7 +65,7 @@
             </Setter>
         </Style>
 
-        <local1:RelativeToAbsoluteConverter x:Key="AbsolluteConverter"/>
+        <!--<local1:RelativeToAbsoluteConverter x:Key="AbsolluteConverter"/>-->
 
     </UserControl.Resources>
     <StackPanel Background="#282B2F">
