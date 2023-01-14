@@ -73,7 +73,7 @@ namespace DemoUI.ViewModel
 
             prototype_view.Add("Home", new HomeVM());
             prototype_view.Add("MusicLibrary", new MusicLibraryVM(this));
-            prototype_view.Add("Playlist", new PlaylistVM());
+            prototype_view.Add("Playlist", new PlaylistVM(this));
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
             
@@ -92,6 +92,10 @@ namespace DemoUI.ViewModel
             UserControlVM userControl1 = (UserControlVM)prototype_view["UserControl"];
             userControl1.passMediaDurationToNavigation += setCurrentDuration;
 
+
+            PlaylistVM playListVM = (PlaylistVM)prototype_view["Playlist"];
+            videoLibraryVM.passToNavigation += setInfoFromMedia;
+            videoLibraryVM.navigateToPlayer += navigateToMediaPlayer;
 
             HomeCommand = new RelayCommand(Home);
             MusicLibraryCommand = new RelayCommand(MusicLibrary);
