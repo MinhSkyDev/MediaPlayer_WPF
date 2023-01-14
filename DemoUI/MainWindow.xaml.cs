@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DemoUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,7 +27,6 @@ namespace DemoUI
         private string _currentPlaying = string.Empty;
 
         private bool _playing = false;
-
         private string _shortName
         {
             get
@@ -50,6 +50,7 @@ namespace DemoUI
 
         }
 
+        
         //DispatcherTimer _timer;
 
         //private void player_MediaOpened(object sender, RoutedEventArgs e)

@@ -7,6 +7,7 @@ using DemoUI.Utilities;
 using System.Windows.Input;
 using DemoUI.Model;
 using DemoUI.View;
+using System.Collections.ObjectModel;
 
 namespace DemoUI.ViewModel
 {
@@ -26,6 +27,7 @@ namespace DemoUI.ViewModel
         public string currentMediaName { get; set; }
         public string currentUri { get; set; }
         public string mediaDuration { get; set; }
+        public string Keyword { get; set; } = "";
         private Media currentMedia;
 
 
@@ -41,6 +43,7 @@ namespace DemoUI.ViewModel
         public ICommand pauseMediaButton { get; set; }
         public ICommand nextMediaButton { get; set; }
         public ICommand previousMediaButton { get; set; }
+        //public ICommand searchButton { get; set; }
 
         private void Home(object obj) => CurrentView = prototype_view["Home"];
         private void MusicLibrary(object obj) => CurrentView = prototype_view["MusicLibrary"];
@@ -78,16 +81,20 @@ namespace DemoUI.ViewModel
             pauseMediaButton = new RelayCommand(pauseButton_command);
             nextMediaButton = new RelayCommand(nextMedia_command);
             previousMediaButton = new RelayCommand(previousMedia_command);
+            //searchButton = new RelayCommand(search_command);
             // Startup Page
             CurrentView = prototype_view["Home"];
         }
 
         public void setInfoFromMedia(Media media)
         {
-            this.currentMediaName = media.name;
-            this.mediaDuration = media.duration;
-            this.currentUri = media.uri;
-            this.currentMedia = media;
+            if (media != null)
+            {
+                this.currentMediaName = media.name;
+                this.mediaDuration = media.duration;
+                this.currentUri = media.uri;
+                this.currentMedia = media;
+            }
         }
 
        
@@ -188,6 +195,9 @@ namespace DemoUI.ViewModel
             userControl.pauseVideo();
         }
 
+        
+    }
+
     }
 
     public static class ShuffleExtension
@@ -209,4 +219,4 @@ namespace DemoUI.ViewModel
 
 
 
-}
+

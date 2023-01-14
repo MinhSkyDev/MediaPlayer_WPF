@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,7 +24,13 @@ namespace DemoUI.ViewModel
         public ICommand doubleClickMusic { get; set; }
         public ICommand selectMusic { get; }
         public ICommand shuffleList { get; set; }
-
+        public ICommand searchButton { get; set; }
+        public ICommand cancleButton { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         //Cặp event delegate dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
         public delegate void passDataMusic(Model.Media data);
         public event passDataMusic passToNavigationMusic;
@@ -62,8 +69,19 @@ namespace DemoUI.ViewModel
         }
 
         public string title { get; set; }
+        public string _keyword;
+        public string Keyword
+        {
+            get { return _keyword; }
+            set { 
+                _keyword= value;
+                OnPropertyChanged(nameof(Keyword));
+            }
+        }
 
         public ObservableCollection<Model.Music> musics { get; set; }
+        public ObservableCollection<Model.Music> temp { get; set; }
+        public ObservableCollection<Model.Music> _subItems { get; set; }
         public MusicLibraryVM(NavigationVM navigation)
         {
 
@@ -71,12 +89,14 @@ namespace DemoUI.ViewModel
             addMusic = new RelayCommand(addMusic_button);
             doubleClickMusic = new RelayCommand(doubleClickMusic_button);
             shuffleList = new RelayCommand(shuffleList_button);
+            searchButton = new RelayCommand(getsearch);
+            cancleButton = new RelayCommand(clearsearch);
             musics = new ObservableCollection<Model.Music>();
+            temp = new ObservableCollection<Model.Music>();
             this.navigation = navigation;
 
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
 
         //Hàm này dùng để bắt event doubleClick trên ListView Item, mục đích là để play music
@@ -115,6 +135,7 @@ namespace DemoUI.ViewModel
 
                 //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
                 musics.Add(currentMusic);
+                temp.Add(currentMusic);
                 passToNavigationMusic?.Invoke(currentMusic);
             }
         }
@@ -154,7 +175,23 @@ namespace DemoUI.ViewModel
             musics.Shuffle();
         }
 
+        private void getsearch(object obj)
+        {
+            _subItems = new ObservableCollection<Model.Music>(temp.Where(
+               sv => sv.name.Contains(Keyword)
+           ).ToList());
 
+            musics = _subItems;
+        }
+
+        private void clearsearch(object obj)
+        {
+            Keyword = "";
+            _subItems = new ObservableCollection<Model.Music>(temp.Where(
+               sv => sv.name.Contains("")
+           ).ToList());
+            musics = _subItems;
+        }
     }
 
 

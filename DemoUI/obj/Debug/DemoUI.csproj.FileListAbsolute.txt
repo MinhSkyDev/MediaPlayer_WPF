@@ -175,3 +175,52 @@ D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.Fody.Runti
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.CopyComplete
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.exe
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.pdb
+D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\TextB.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\DemoUI.exe.config
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\DemoUI.exe
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\DemoUI.pdb
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.dll
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\TagLibSharp.dll
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.xml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\TagLibSharp.pdb
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\bin\Debug\TagLibSharp.xml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.AssemblyReference.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.SuggestedBindingRedirects.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Button.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Image.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Page.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\TextB.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\TextBinding.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\Text.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\FullScreen.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\MainWindow.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\Home.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\MusicLibrary.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\Playlist.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\UserControl1.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\VideoLibrary.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\App.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI_MarkupCompile.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI_MarkupCompile.lref
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\App.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\FullScreen.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\MainWindow.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\Utilities\DataTemplate.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\Home.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\MusicLibrary.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\Playlist.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\UserControl1.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\View\VideoLibrary.baml
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.g.resources
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.Properties.Resources.resources
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.GenerateResource.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.CoreCompileInputs.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.Fody.CopyLocal.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.Fody.RuntimeCopyLocal.cache
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.csproj.CopyComplete
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.exe
+D:\Code\LTW\New folder (2)\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.pdb

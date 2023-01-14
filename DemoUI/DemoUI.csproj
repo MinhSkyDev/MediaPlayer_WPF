@@ -129,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\TextB.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\TextBinding.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -248,6 +252,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\img_shuffle_music.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\img_cancle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\img_cancle2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.6.4\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.4\build\Fody.targets')" />

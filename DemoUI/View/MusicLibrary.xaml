@@ -74,24 +74,44 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Name="MusicTitle" Grid.Column="0" Text="Music" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
-                <Button Name="AddMusic" Style="{DynamicResource RoundButton}" Command="{Binding addMusic}" HorizontalAlignment="Right" Margin="0,5,60,0" Grid.Column="1" Width="110" Height="40" Background="#393C40" BorderBrush="#212529" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Images/img_add.png" Width="25" Margin="0,0,0,0" />
-                        <TextBlock Text="Add song" Style="{StaticResource Text_Style}" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
-                    </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="36" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,50,0" Background="#0BCDFF" >
 
-                </Button>
+                    <TextBox x:Name="keywordTextBox" Style="{StaticResource TextB_Style}" Margin="1,0,0,0" BorderThickness="0" Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" TextWrapping="WrapWithOverflow" Width="220" Height="35" Background="#393C40"  >
+                    </TextBox>
+                    <Button x:Name="cancleButton" Width="35" Height="35" Background="#393C40" BorderThickness="0" Command ="{Binding cancleButton}">
+                        <Image Source="/Images/img_cancle2.png" Height="19"/>
+                    </Button>
+                    <Button x:Name="searchButton" Width="35" Height="35" Background="#282B2F" BorderBrush="#0BCDFF" Command ="{Binding searchButton}">
+                        <Image Source="/Images/img_search2.png"/>
+                    </Button>
+
+                </StackPanel>
             </Grid>
         </StackPanel>
-        <Button Style="{DynamicResource RoundButton}" Name="shuffleMusic"  
-                Command ="{Binding shuffleList}"
-                HorizontalAlignment="Left" Margin="40,5,60,0" Grid.Column="1" Width="150" Height="35" Background="#0BCDFF" BorderBrush="#282B2F" >
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Images/img_shuffle_music.png"  Width="25" Margin="0,0,0,0" />
-                <TextBlock Text="Shuffle and play" Style="{StaticResource Text_Style}"  VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
-            </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Style="{DynamicResource RoundButton}" Grid.Column="0" Name="shuffleMusic"  
+                    Command ="{Binding shuffleList}"
+                    HorizontalAlignment="Left" Margin="40,5,60,0"  Width="150" Height="35" Background="#0BCDFF" BorderBrush="#282B2F" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/img_shuffle_music.png"  Width="25" Margin="0,0,0,0" />
+                    <TextBlock Text="Shuffle and play" Style="{StaticResource Text_Style}"  VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
+                </StackPanel>
 
-        </Button>
+            </Button>
+            
+            <Button Name="AddMusic" Style="{DynamicResource RoundButton}" Command="{Binding addMusic}" HorizontalAlignment="Right" Margin="0,5,60,0" Grid.Column="1" Width="110" Height="35" Background="#393C40" BorderBrush="#212529" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/img_add.png" Width="25" Margin="0,0,0,0" />
+                    <TextBlock Text="Add song" Style="{StaticResource Text_Style}" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
+                </StackPanel>
+
+            </Button>
+
+        </Grid>
         <ListView Name="MusicList" ItemsSource="{Binding musics}" SelectedItem="{Binding selectedItemMusic}" SelectedIndex="{Binding selectedIndex}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       Background="#282B2F" BorderBrush="#282B2F" Margin="0,20,0,0">
             <ListView.ItemsPanel>

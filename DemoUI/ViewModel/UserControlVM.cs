@@ -66,7 +66,8 @@ namespace DemoUI.ViewModel
         }
 
         public void playVideo()
-        {           
+        {
+            mediaPlayer.LoadedBehavior = MediaState.Manual;
             mediaPlayer.Play();
         }
 
