@@ -26,7 +26,26 @@ namespace DemoUI.ViewModel
         public string currentMediaName { get; set; }
         public string currentUri { get; set; }
         public string mediaDuration { get; set; }
+        public string currentDuration { get; set; }
         private Media currentMedia;
+
+
+        //Biến này dùng để binding value cho slider
+        private double slidervalue;
+        public double sliderValue { get { return slidervalue; } 
+            set
+            {
+                slidervalue = value;
+
+                //Ở đây phải check xem liệu có đang có Media nào đang play hay không ?
+
+                //Trường hợp đã check xong Media đã play xong
+                //Bắn value này qua cho màn hình 
+                UserControlVM userControl1 = (UserControlVM)prototype_view["UserControl"];
+                userControl1.changeTimeSpan(slidervalue);
+            } 
+        }
+        public double sliderValueMaximum { get; set; }
 
 
         public ICommand HomeCommand { get; set; }
@@ -49,7 +68,7 @@ namespace DemoUI.ViewModel
         private void Playing(object obj) => CurrentView = prototype_view["UserControl"];
         public NavigationVM()
         {
-
+            sliderValueMaximum = 0f;
             prototype_view = new Dictionary<string, object>();
 
             prototype_view.Add("Home", new HomeVM());
@@ -69,6 +88,11 @@ namespace DemoUI.ViewModel
             musicLibraryVM.passToNavigationMusic += setInfoFromMedia;
             musicLibraryVM.navigateToPlayer += navigateToMediaPlayer;
 
+
+            UserControlVM userControl1 = (UserControlVM)prototype_view["UserControl"];
+            userControl1.passMediaDurationToNavigation += setCurrentDuration;
+
+
             HomeCommand = new RelayCommand(Home);
             MusicLibraryCommand = new RelayCommand(MusicLibrary);
             VideoLibraryCommand = new RelayCommand(VideoLibrary);
@@ -80,6 +104,8 @@ namespace DemoUI.ViewModel
             previousMediaButton = new RelayCommand(previousMedia_command);
             // Startup Page
             CurrentView = prototype_view["Home"];
+
+            
         }
 
         public void setInfoFromMedia(Media media)
@@ -106,6 +132,7 @@ namespace DemoUI.ViewModel
         {
             UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.playVideo();
+            sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
         }
 
 
@@ -187,6 +214,14 @@ namespace DemoUI.ViewModel
             UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.pauseVideo();
         }
+
+        //Dùng để set duration được pass từ màn hình Usercontrol1 về
+        public void setCurrentDuration(string duration)
+        {
+            this.currentDuration = duration;
+        }
+        
+
 
     }
 

@@ -16,11 +16,6 @@
                 Content="{Binding MEDIAPlayer}">
                 
             </ContentControl>    
-        
-        <!--<MediaElement Name="MediaPlayer" Width="1000" Height="550" Source="{Binding uri}"
-                      HorizontalAlignment="Left" VerticalAlignment="Top"
-                      Stretch="UniformToFill"
-                      ></MediaElement>-->
             <StackPanel Height="40" Width="1300" Background="#282B2F" HorizontalAlignment="Center">
                 <StackPanel.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickMusic, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>

@@ -50,6 +50,8 @@ namespace DemoUI
 
         }
 
+
+
         //DispatcherTimer _timer;
 
         //private void player_MediaOpened(object sender, RoutedEventArgs e)
