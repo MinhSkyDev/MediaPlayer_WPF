@@ -79,8 +79,6 @@ namespace DemoUI.ViewModel
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0,0,0,1,0);
             timer.Tick += time_ticker;
-            timer.Start();
-
         }
 
         private void time_ticker(object sender, EventArgs e)
