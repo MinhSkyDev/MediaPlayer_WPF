@@ -73,7 +73,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="MusicTitle" Grid.Column="0" Text="Music" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
+                <TextBlock Name="MusicTitle" Grid.Column="0" Text="{Binding title}" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
                 <Button Name="AddMusic" Style="{DynamicResource RoundButton}" Command="{Binding addMusic}" HorizontalAlignment="Right" Margin="0,5,60,0" Grid.Column="1" Width="110" Height="40" Background="#393C40" BorderBrush="#212529" >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Images/img_add.png" Width="25" Margin="0,0,0,0" />

@@ -29,6 +29,8 @@ namespace DemoUI.ViewModel
         public string currentDuration { get; set; }
         private Media currentMedia;
 
+        // data for selected playlist
+        private string path, title;
 
         //Biến này dùng để binding value cho slider
         private double slidervalue;
@@ -66,6 +68,10 @@ namespace DemoUI.ViewModel
         private void VideoLibrary(object obj) => CurrentView = prototype_view["VideoLibrary"];
         private void Playlist(object obj) => CurrentView = prototype_view["Playlist"];
         private void Playing(object obj) => CurrentView = prototype_view["UserControl"];
+
+        // Playlist được chọn
+        private void SelectedPlaylist(object obj) => CurrentView = prototype_view["SelectedPlaylist"];
+
         public NavigationVM()
         {
             sliderValueMaximum = 0f;
@@ -76,6 +82,8 @@ namespace DemoUI.ViewModel
             prototype_view.Add("Playlist", new PlaylistVM(this));
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
+
+            prototype_view.Add("SelectedPlaylist", new MusicLibraryVM(this));
             
 
 
@@ -94,8 +102,9 @@ namespace DemoUI.ViewModel
 
 
             PlaylistVM playListVM = (PlaylistVM)prototype_view["Playlist"];
-            videoLibraryVM.passToNavigation += setInfoFromMedia;
-            videoLibraryVM.navigateToPlayer += navigateToMediaPlayer;
+            playListVM.passToNavigationPath += setPathPlaylist;
+            playListVM.navigateToMusic += navigateToMusic;
+
 
             HomeCommand = new RelayCommand(Home);
             MusicLibraryCommand = new RelayCommand(MusicLibrary);
@@ -110,6 +119,12 @@ namespace DemoUI.ViewModel
             CurrentView = prototype_view["Home"];
 
             
+        }
+
+        public void setPathPlaylist(string path, string title)
+        {
+            this.path = path;
+            this.title = title;
         }
 
         public void setInfoFromMedia(Media media)
@@ -130,6 +145,13 @@ namespace DemoUI.ViewModel
             userControl.setData(currentMedia.name, currentMedia.duration, currentMedia.uri);
             CurrentView = userControl;
 
+        }
+
+        public void navigateToMusic()
+        {
+            MusicLibraryVM SelectedPlaylist = (MusicLibraryVM)prototype_view["SelectedPlaylist"];
+            SelectedPlaylist.newPlaylist(path, title);
+            CurrentView = SelectedPlaylist;
         }
 
         void playButton_command(Object obj)
