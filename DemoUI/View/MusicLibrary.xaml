@@ -64,7 +64,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <StackPanel Background="#282B2F">
         <StackPanel>
             <Grid>
@@ -102,7 +102,7 @@
                 </StackPanel>
 
             </Button>
-            
+
             <Button Name="AddMusic" Style="{DynamicResource RoundButton}" Command="{Binding addMusic}" HorizontalAlignment="Right" Margin="0,5,60,0" Grid.Column="1" Width="110" Height="35" Background="#393C40" BorderBrush="#212529" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Images/img_add.png" Width="25" Margin="0,0,0,0" />

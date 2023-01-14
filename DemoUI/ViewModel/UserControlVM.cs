@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace DemoUI.ViewModel
@@ -16,8 +17,11 @@ namespace DemoUI.ViewModel
         public string duration { get; set; }
         public string uri { get; set; }
 
+        public DispatcherTimer timer;
+
 
         private MediaElement mediaPlayer = new MediaElement();
+
         public MediaElement MEDIAPlayer
         {
             get
@@ -28,20 +32,28 @@ namespace DemoUI.ViewModel
             
                 mediaPlayer = value;
                 mediaPlayer.Source = new Uri(uri);
-                mediaPlayer.Width = 1000;
-                mediaPlayer.Height = 550;
+                mediaPlayer.Width = 500;
+                mediaPlayer.Height = 500;
                 mediaPlayer.Stretch= Stretch.UniformToFill;
                 mediaPlayer.Play();
-                //mediaPlayer.Stop();
-
+                mediaPlayer.Stop();
             }
         }
 
+        //Event delegate để pass chỉ số thời gian đang được chơi hiện tại tới playbar
+        public delegate void PassMediaDurationToNavigation(string duration);
+        public event PassMediaDurationToNavigation passMediaDurationToNavigation;
+
+       
 
         public UserControlVM()
         {
-            //Do nothing
+            
         }
+
+       
+
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -63,17 +75,47 @@ namespace DemoUI.ViewModel
 
             mediaPlayer.Play();
             mediaPlayer.Stop();
+
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0,0,0,1,0);
+            timer.Tick += time_ticker;
+        }
+
+        private void time_ticker(object sender, EventArgs e)
+        {
+            int hours = mediaPlayer.Position.Hours;
+            int minutes = mediaPlayer.Position.Minutes;
+            int seconds = mediaPlayer.Position.Seconds;
+            String totalPosition = "";
+            if (seconds < 10)
+            {
+                totalPosition = $"0{hours}:0{minutes}:0{seconds}";
+            }
+            else
+            {
+                totalPosition = $"0{hours}:0{minutes}:{seconds}";
+            }
+
+            passMediaDurationToNavigation?.Invoke(totalPosition);
+        }
+
+        public void changeTimeSpan(double value)
+        {
+            TimeSpan newPosition = TimeSpan.FromSeconds(value);
+            mediaPlayer.Position = newPosition;
         }
 
         public void playVideo()
         {
             mediaPlayer.LoadedBehavior = MediaState.Manual;
             mediaPlayer.Play();
+            timer.Start();
         }
 
         public void pauseVideo()
         {
             mediaPlayer.Pause();
+            timer.Stop();
         }
 
     }

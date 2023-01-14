@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DemoUI.View"
+             xmlns:local="clr-namespace:DemoUI.View" xmlns:local1="clr-namespace:DemoUI.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Style="{StaticResource Page_Style}">
+    
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -63,6 +64,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--<local1:RelativeToAbsoluteConverter x:Key="AbsolluteConverter"/>-->
+
     </UserControl.Resources>
     <StackPanel Background="#282B2F">
         <StackPanel>
@@ -73,7 +77,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Playlist" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
-                <Button HorizontalAlignment="Right" Style="{DynamicResource RoundButton}" Margin="0,5,60,0" Grid.Column="1" Width="120" Height="40" Background="#393C40" BorderBrush="#212529" >
+                <Button x:Name="NewPlaylist" Command="{Binding NewPlaylist}" HorizontalAlignment="Right" Style="{DynamicResource RoundButton}" Margin="0,5,60,0" Grid.Column="1" Width="120" Height="40" Background="#393C40" BorderBrush="#212529">
                     <StackPanel Orientation="Horizontal"  >
                         <Image Source="/Images/img_list.png" Width="25" Margin="0,0,0,0" />
                         <TextBlock Text="New playlist" Style="{StaticResource Text_Style}" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
@@ -82,8 +86,45 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ListView Name="employeeList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      Background="#282B2F" BorderBrush="#282B2F">
+        <StackPanel Orientation="Horizontal" Height="37" HorizontalAlignment="Left" Grid.Column="1" Margin="40,0,0,0" Background="#0BCDFF" >
+
+            <TextBox x:Name="keywordTextBox" Style="{StaticResource TextB_Style}" Margin="1,0,0,0" BorderThickness="0" Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" TextWrapping="WrapWithOverflow" Width="220" Height="35" Background="#393C40"  >
+            </TextBox>
+            <Button x:Name="cancleButton" Width="35" Height="35" Background="#393C40" BorderThickness="0" Command ="{Binding cancleButton}">
+                <Image Source="/Images/img_cancle2.png" Height="19"/>
+            </Button>
+            <Button x:Name="searchButton" Width="35" Height="35" Background="#282B2F" BorderBrush="#0BCDFF" Command ="{Binding searchButton}">
+                <Image Source="/Images/img_search2.png"/>
+            </Button>
+
+        </StackPanel>
+        <ListView Name="employeeList" ItemsSource="{Binding _playlist}" SelectedItem="{Binding selectedItemPlaylist}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Background="#282B2F" BorderBrush="#282B2F" Margin="0,10,0,0">
+
+            <ListView.Resources >
+                <ContextMenu x:Key="listViewContextMenu">
+                    <MenuItem Header="Play" Background="#393C40" BorderBrush="#212529" Foreground="WhiteSmoke">
+                        <MenuItem.Icon>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem Header="Change Name" Background="#393C40" BorderBrush="#212529" Foreground="WhiteSmoke">
+                        <MenuItem.Icon>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8AC;"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.Resources>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource listViewContextMenu}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -92,24 +133,29 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="15,20,5,0">
+                    <Border Margin="10">
                         <StackPanel Height="250" Width="200" Background="#36393F"  >
-                            <Border Width="170" Height="170" BorderBrush="#282B2F" Margin="0,5,0,0">
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickPlaylist, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
+                            <!--<Border Width="170" Height="170" BorderBrush="#282B2F" Margin="0,5,0,0">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="{Binding CoverPath}"></ImageBrush>
+                                    <ImageBrush ImageSource="{Binding CoverPath, Converter={StaticResource AbsolluteConverter}}"></ImageBrush>
                                 </Border.Background>
                                 <Border.Effect>
                                     <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="270" Color="#282B2F">
                                     </DropShadowEffect>
                                 </Border.Effect>
-                            </Border>
+                            </Border>-->
 
-                            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" >
-                                  <Run Text="{Binding Name}" Style="{StaticResource TextBinding_Style}" FontSize="15" FontWeight="Medium"/>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90B;" FontSize="50" Padding="50" Margin="20"
+                                       Style="{StaticResource Text_Style}" Background="#FF393C40" HorizontalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="0" >
+                                  <Run Text="{Binding name}" Style="{StaticResource TextBinding_Style}" FontSize="15" FontWeight="Medium"/>
                             </TextBlock>
                             <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Style="{StaticResource Text_Style}" FontSize="15"   FontWeight="Light">
                                       <Run Text="{Binding numberOfitem}" Style="{StaticResource TextBinding_Style}" FontSize="15"   FontWeight="Light"/>
-                    items
+                            
                             </TextBlock>
                         </StackPanel>
                     </Border>

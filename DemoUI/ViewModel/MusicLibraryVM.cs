@@ -191,6 +191,26 @@ namespace DemoUI.ViewModel
                sv => sv.name.Contains("")
            ).ToList());
             musics = _subItems;
+
+        }
+
+        // Xử lý khi được xem là playlist
+        public void newPlaylist(string path, string title)
+        {
+            this.title = title;
+            DirectoryInfo playlist = new DirectoryInfo(path + @"\" + title);
+            FileInfo[] items = playlist.GetFiles("*");
+            musics.Clear();
+            foreach (FileInfo item in items)
+            {
+                string music_name = item.Name;
+                Model.Music currentMusic = new Model.Music(item);
+
+                //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                musics.Add(currentMusic);
+                passToNavigationMusic?.Invoke(currentMusic);
+            }
+
         }
     }
 
