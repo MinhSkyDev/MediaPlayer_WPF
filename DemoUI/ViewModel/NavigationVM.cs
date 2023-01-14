@@ -159,6 +159,7 @@ namespace DemoUI.ViewModel
             UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.playVideo();
             sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+            sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
         }
 
 

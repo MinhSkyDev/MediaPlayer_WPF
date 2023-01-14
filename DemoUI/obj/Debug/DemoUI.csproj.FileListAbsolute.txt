@@ -177,3 +177,5 @@ D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.exe
 D:\Code\LTW\New folder\MediaPlayer_WPF\DemoUI\obj\Debug\DemoUI.pdb
 D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\View\AddPlaylistWindow.g.cs
 D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\View\AddPlaylistWindow.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\AddPlaylistWindow.g.cs
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\AddPlaylistWindow.baml
