@@ -29,10 +29,14 @@ namespace DemoUI.ViewModel
         public string currentDuration { get; set; }
         private Media currentMedia;
 
+        // data for selected playlist
+        private string path, title;
 
         //Biến này dùng để binding value cho slider
         private double slidervalue;
-        public double sliderValue { get { return slidervalue; } 
+        public double sliderValue
+        {
+            get { return slidervalue; }
             set
             {
                 slidervalue = value;
@@ -43,7 +47,7 @@ namespace DemoUI.ViewModel
                 //Bắn value này qua cho màn hình 
                 UserControlVM userControl1 = (UserControlVM)prototype_view["UserControl"];
                 userControl1.changeTimeSpan(slidervalue);
-            } 
+            }
         }
         public double sliderValueMaximum { get; set; }
 
@@ -66,6 +70,10 @@ namespace DemoUI.ViewModel
         private void VideoLibrary(object obj) => CurrentView = prototype_view["VideoLibrary"];
         private void Playlist(object obj) => CurrentView = prototype_view["Playlist"];
         private void Playing(object obj) => CurrentView = prototype_view["UserControl"];
+
+        // Playlist được chọn
+        private void SelectedPlaylist(object obj) => CurrentView = prototype_view["SelectedPlaylist"];
+
         public NavigationVM()
         {
             sliderValueMaximum = 0f;
@@ -76,7 +84,9 @@ namespace DemoUI.ViewModel
             prototype_view.Add("Playlist", new PlaylistVM(this));
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
-            
+
+            prototype_view.Add("SelectedPlaylist", new MusicLibraryVM(this));
+
 
 
             //Inject event here
@@ -94,8 +104,9 @@ namespace DemoUI.ViewModel
 
 
             PlaylistVM playListVM = (PlaylistVM)prototype_view["Playlist"];
-            videoLibraryVM.passToNavigation += setInfoFromMedia;
-            videoLibraryVM.navigateToPlayer += navigateToMediaPlayer;
+            playListVM.passToNavigationPath += setPathPlaylist;
+            playListVM.navigateToMusic += navigateToMusic;
+
 
             HomeCommand = new RelayCommand(Home);
             MusicLibraryCommand = new RelayCommand(MusicLibrary);
@@ -109,7 +120,13 @@ namespace DemoUI.ViewModel
             // Startup Page
             CurrentView = prototype_view["Home"];
 
-            
+
+        }
+
+        public void setPathPlaylist(string path, string title)
+        {
+            this.path = path;
+            this.title = title;
         }
 
         public void setInfoFromMedia(Media media)
@@ -120,7 +137,7 @@ namespace DemoUI.ViewModel
             this.currentMedia = media;
         }
 
-       
+
         /// <summary>
         /// Bắn dữ liệu Media đang chơi hiện tại và chuyển view sang trình chơi Media
         /// </summary>
@@ -132,11 +149,19 @@ namespace DemoUI.ViewModel
 
         }
 
+        public void navigateToMusic()
+        {
+            MusicLibraryVM SelectedPlaylist = (MusicLibraryVM)prototype_view["SelectedPlaylist"];
+            SelectedPlaylist.newPlaylist(path, title);
+            CurrentView = SelectedPlaylist;
+        }
+
         void playButton_command(Object obj)
         {
             UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.playVideo();
             sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+            sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
         }
 
 
@@ -148,15 +173,15 @@ namespace DemoUI.ViewModel
                 VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
                 Media nextMedia = videoLibraryVM.getNextMedia();
 
-                if(nextMedia != null)
+                if (nextMedia != null)
                 {
                     currentMedia = nextMedia;
                     videoLibraryVM.selectedIndex += 1;
-                    navigateToMediaPlayer(); 
+                    navigateToMediaPlayer();
                 }
 
             }
-            else if(type.Equals("MusicLibrary")) 
+            else if (type.Equals("MusicLibrary"))
             {
                 MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view[type];
                 Media nextMedia = musicLibraryVM.getNextMedia();
@@ -187,7 +212,7 @@ namespace DemoUI.ViewModel
                 if (previousMedia != null)
                 {
                     currentMedia = previousMedia;
-                    
+
                     videoLibraryVM.selectedIndex -= 1;
                     navigateToMediaPlayer();
                 }
@@ -224,7 +249,7 @@ namespace DemoUI.ViewModel
         {
             this.currentDuration = duration;
         }
-        
+
 
 
     }

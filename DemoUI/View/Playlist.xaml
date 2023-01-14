@@ -86,8 +86,20 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ListView Name="employeeList" ItemsSource="{Binding _playlist}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      Background="#282B2F" BorderBrush="#282B2F">
+        <StackPanel Orientation="Horizontal" Height="37" HorizontalAlignment="Left" Grid.Column="1" Margin="40,0,0,0" Background="#0BCDFF" >
+
+            <TextBox x:Name="keywordTextBox" Style="{StaticResource TextB_Style}" Margin="1,0,0,0" BorderThickness="0" Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" TextWrapping="WrapWithOverflow" Width="220" Height="35" Background="#393C40"  >
+            </TextBox>
+            <Button x:Name="cancleButton" Width="35" Height="35" Background="#393C40" BorderThickness="0" Command ="{Binding cancleButton}">
+                <Image Source="/Images/img_cancle2.png" Height="19"/>
+            </Button>
+            <Button x:Name="searchButton" Width="35" Height="35" Background="#282B2F" BorderBrush="#0BCDFF" Command ="{Binding searchButton}">
+                <Image Source="/Images/img_search2.png"/>
+            </Button>
+
+        </StackPanel>
+        <ListView Name="employeeList" ItemsSource="{Binding _playlist}" SelectedItem="{Binding selectedItemPlaylist}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Background="#282B2F" BorderBrush="#282B2F" Margin="0,10,0,0">
 
             <ListView.Resources >
                 <ContextMenu x:Key="listViewContextMenu">
@@ -123,6 +135,9 @@
                 <DataTemplate>
                     <Border Margin="10">
                         <StackPanel Height="250" Width="200" Background="#36393F"  >
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickPlaylist, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
                             <!--<Border Width="170" Height="170" BorderBrush="#282B2F" Margin="0,5,0,0">
                                 <Border.Background>
                                     <ImageBrush ImageSource="{Binding CoverPath, Converter={StaticResource AbsolluteConverter}}"></ImageBrush>

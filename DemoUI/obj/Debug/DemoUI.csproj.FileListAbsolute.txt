@@ -179,3 +179,4 @@ D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\Vie
 D:\K20 FIT HCMUS\Ltrinh win Csharp\Đồ án 2\Media Player\DemoUI\obj\Debug\View\AddPlaylistWindow.baml
 C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\AddPlaylistWindow.g.cs
 C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\View\AddPlaylistWindow.baml
+C:\Users\tkhoa\OneDrive\Desktop\WP_FinalProject\MediaPlayer_WPF\DemoUI\obj\Debug\Styles\TextB.baml
