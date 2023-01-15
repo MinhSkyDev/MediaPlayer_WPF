@@ -1,5 +1,6 @@
 ﻿using DemoUI.Model;
 using DemoUI.Utilities;
+using DemoUI.View;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
@@ -20,7 +22,7 @@ namespace DemoUI.ViewModel
     {
         private NavigationVM navigation;
         public ICommand addMusic { get; }
-
+        public ICommand addPlaylist { get; set; }
         public ICommand doubleClickMusic { get; set; }
         public ICommand selectMusic { get; }
         public ICommand shuffleList { get; set; }
@@ -69,6 +71,9 @@ namespace DemoUI.ViewModel
         }
 
         public string title { get; set; }
+        private string path = "";
+        private List<string> playlistItems = new List<string>();
+        public string addToPlaylist { get; set; }
         public string _keyword;
         public string Keyword
         {
@@ -84,9 +89,10 @@ namespace DemoUI.ViewModel
         public ObservableCollection<Model.Music> _subItems { get; set; }
         public MusicLibraryVM(NavigationVM navigation)
         {
-
+            
             title = "Music";
             addMusic = new RelayCommand(addMusic_button);
+            addPlaylist = new RelayCommand(add_playlist);
             doubleClickMusic = new RelayCommand(doubleClickMusic_button);
             shuffleList = new RelayCommand(shuffleList_button);
             searchButton = new RelayCommand(getsearch);
@@ -107,6 +113,23 @@ namespace DemoUI.ViewModel
             passToNavigationMusic?.Invoke(currentMusic);
             //Rồi sau đó invoke để chuyển màn hình sang MediaPlayer
             navigateToPlayer?.Invoke();
+        }
+
+        private void add_playlist(object obj)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            string format = "Video file | *.*";
+            openFileDialog.Filter = format;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                // Do nothing
+            }
+            else
+            {
+                //do nothing
+            }
         }
 
         private void addMusic_button(object obj)
@@ -133,10 +156,36 @@ namespace DemoUI.ViewModel
                 string music_name = musicInfo.Name;
                 Model.Music currentMusic = new Model.Music(musicInfo);
 
-                //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
-                musics.Add(currentMusic);
-                temp.Add(currentMusic);
-                passToNavigationMusic?.Invoke(currentMusic);
+                // Nếu đang trong playlist
+                if (this.path != "")
+                {
+                    if (!playlistItems.Contains(music_path_uri))
+                    {
+                        playlistItems.Add(music_path_uri);
+                        FileInfo playlist = new FileInfo(this.path);
+                        File.AppendAllText(this.path, music_path_uri + Environment.NewLine);
+                    }
+                }
+
+                //Sau khi add song thì kiểm tra nó đã tồn tại chưa
+                
+                bool isExists = false;
+                foreach (Model.Music music in musics)
+                {
+                    if (music.name == music_name)
+                    {
+                        isExists = true;
+                        break;
+                    }
+                }
+
+                //Sau đó chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                if (!isExists)
+                {
+                    musics.Add(currentMusic);
+                    temp.Add(currentMusic);
+                    passToNavigationMusic?.Invoke(currentMusic);
+                }
             }
         }
 
@@ -198,18 +247,36 @@ namespace DemoUI.ViewModel
         public void newPlaylist(string path, string title)
         {
             this.title = title;
-            DirectoryInfo playlist = new DirectoryInfo(path + @"\" + title);
-            FileInfo[] items = playlist.GetFiles("*");
+            this.path = path + @"\" + title + ".txt";
+            //DirectoryInfo playlist = new DirectoryInfo(path + @"\" + title);
+            FileInfo playlist = new FileInfo(this.path);
             musics.Clear();
-            foreach (FileInfo item in items)
-            {
-                string music_name = item.Name;
-                Model.Music currentMusic = new Model.Music(item);
 
-                //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
-                musics.Add(currentMusic);
-                passToNavigationMusic?.Invoke(currentMusic);
+            using (StreamReader sr = playlist.OpenText())
+            {
+                string item = "";
+                while ((item = sr.ReadLine()) != null)
+                {
+                    this.playlistItems.Add(item);
+                    FileInfo music = new FileInfo(item);
+                    Model.Music currentMusic = new Model.Music(music);
+
+                    //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                    musics.Add(currentMusic);
+                    passToNavigationMusic?.Invoke(currentMusic);
+                }
             }
+
+
+            //foreach (FileInfo item in items)
+            //{
+            //    string music_name = item.Name;
+            //    Model.Music currentMusic = new Model.Music(item);
+
+            //    //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+            //    musics.Add(currentMusic);
+            //    passToNavigationMusic?.Invoke(currentMusic);
+            //}
 
         }
     }

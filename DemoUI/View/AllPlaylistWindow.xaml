@@ -1,0 +1,47 @@
+﻿<Window x:Class="DemoUI.View.AllPlaylistWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoUI.View"
+        mc:Ignorable="d"
+        Title="AllPlaylistWindow" Height="350" Width="400">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ListView Name="PlaylistListView" Height="260" Width="400" 
+                  VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ListView.ItemsPanel >
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10">
+                        <StackPanel Height="250" Width="200" Background="#36393F"  >
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90B;" FontSize="50" Padding="50" Margin="20"
+                                       Style="{StaticResource Text_Style}" Background="#FF393C40" HorizontalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="0" >
+                                  <Run Text="{Binding name}" Style="{StaticResource TextBinding_Style}" FontSize="15" FontWeight="Medium"/>
+                            </TextBlock>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Style="{StaticResource Text_Style}" FontSize="15"   FontWeight="Light">
+                                      <Run Text="{Binding numberOfitem}" Style="{StaticResource TextBinding_Style}" FontSize="15"   FontWeight="Light"/>
+
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <StackPanel Orientation="Horizontal"
+                    Margin="10"
+                    HorizontalAlignment="Center">
+            <Button Name="btnOk" Content="OK"
+                    Width="70" Height="30" Margin="40 0"
+                    Click="btnOk_Click"/>
+            <Button Name="btnCancel" Content="Cancel"
+                    Width="70" Height="30" Margin="40 0"
+                    Click="btnCancel_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
