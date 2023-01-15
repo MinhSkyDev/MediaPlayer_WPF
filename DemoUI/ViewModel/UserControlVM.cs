@@ -19,6 +19,7 @@ namespace DemoUI.ViewModel
 
         public DispatcherTimer timer;
 
+        private bool _playing = false;
 
         private MediaElement mediaPlayer = new MediaElement();
 
@@ -110,6 +111,28 @@ namespace DemoUI.ViewModel
             mediaPlayer.LoadedBehavior = MediaState.Manual;
             mediaPlayer.Play();
             timer.Start();
+        }
+
+        public string playVideoImprove()
+        {
+            string result = "";
+            if (_playing)
+            {
+                mediaPlayer.Pause();
+                timer.Stop();
+                _playing = false;
+                result = @"\Images\img_play.png";
+            }
+            else
+            {
+                mediaPlayer.LoadedBehavior = MediaState.Manual;
+                mediaPlayer.Play();
+                timer.Start();
+                _playing = true;
+                result = @"\Images\img_pause.png";
+            }
+
+            return result;
         }
 
         public void pauseVideo()

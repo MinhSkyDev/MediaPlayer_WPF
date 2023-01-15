@@ -31,6 +31,9 @@ namespace DemoUI.ViewModel
         public string currentDuration { get; set; }
         private Media currentMedia;
 
+        //Play button
+        public string imagePlayBtn { get; set; } = @"\Images\img_play.png";
+
         // data for selected playlist
         private string path, title;
 
@@ -207,7 +210,7 @@ namespace DemoUI.ViewModel
             if (currentMedia != null)
             {
                 UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
-                userControl.playVideo();
+                imagePlayBtn = userControl.playVideoImprove();
                 WritingMediaStatusIsPlaying(currentMedia);
                 sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;

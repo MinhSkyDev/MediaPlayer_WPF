@@ -152,16 +152,18 @@
                             <Image Source="/Images/img_pre.png" Width="35" Height="35"></Image>
                         </Button>
                         <Button x:Name="playButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"   HorizontalAlignment="Left" VerticalAlignment="Center"
-                                Command ="{Binding playMediaButton}"
+                                Command ="{Binding playMediaButton}" 
                                 >
-                            <Image Source="/Images/img_play.png" Width="35" Height="35"></Image>
+                            <Image Source="{Binding imagePlayBtn}" Width="35" Height="35"></Image>
                         </Button>
+                        <!--
                         <Button x:Name="stopButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center"
                                 Command="{Binding pauseMediaButton}"
                                 
                                 >
                             <Image Source="/Images/img_pause.png" Width="35" Height="35"></Image>
                         </Button>
+                        -->
                         <Button x:Name="nextButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center" 
                                 Command ="{Binding nextMediaButton}"
                                 >
