@@ -6,34 +6,34 @@
         xmlns:local="clr-namespace:DemoUI.View"
         mc:Ignorable="d"
         Title="AddPlaylistWindow" Height="450" Width="350" Background="#212529" >
-
+    
     <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90B;" FontSize="50" Padding="50" Margin="0"
                    Style="{StaticResource Text_Style}" Background="#FF393C40" HorizontalAlignment="Center"/>
 
         <Canvas Margin="20 30" Width="250" Height="35" HorizontalAlignment="Center">
-            <TextBox x:Name="searchBox" Opacity="0.5" Width="250" Height="35" Padding="5"
+            <TextBox x:Name="searchBox" Opacity="0.3" Width="250" Height="35" Padding="5" Background="#FFFFFF"
                       TextChanged="textbox" Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}"
-                     VerticalContentAlignment="Center" Panel.ZIndex="2"/>
-            <TextBlock FontSize="20" 
+                     VerticalContentAlignment="Center" Panel.ZIndex="2" />
+            <TextBlock FontSize="20" Style="{StaticResource Text_Style}" Margin="0,3,0,0"
                        FontWeight="Bold" Text="Name this playlist"
                        Canvas.Left="10" Panel.ZIndex="1" Canvas.Top="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;"
-                       FontSize="18"
+                       FontSize="18" Style="{StaticResource Text_Style}" Margin="0"
                        Panel.ZIndex="3" Canvas.Left="222" Canvas.Top="8" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.544,0.485"/>
 
         </Canvas>
 
         <StackPanel Orientation="Horizontal"
-                    Margin="0 60 0 10"
+                    Margin="0 30 0 10"
                     HorizontalAlignment="Center">
             <Button Name="btnCancel" Content="Cancel"
                     Width="70" Height="30" Margin="40 0"
-                    Click="btnCancel_Click"/>
+                    Click="btnCancel_Click"  Background="#FFFFFF" />
             <Button Name="btnOk" Content="OK"
                     Width="70" Height="30" Margin="40 0"
-                    Click="btnOk_Click"/>
+                    Click="btnOk_Click" Background="#FFFFFF" />
 
         </StackPanel>
     </StackPanel>

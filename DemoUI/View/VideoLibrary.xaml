@@ -76,6 +76,35 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Name="VideoTitle" Grid.Column="0" Text="{Binding title}" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
+                <StackPanel Orientation="Horizontal" Height="36" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,50,0" Background="#0BCDFF" >
+
+                    <TextBox x:Name="keywordTextBox" Style="{StaticResource TextB_Style}" Margin="1,0,0,0" BorderThickness="0" Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" TextWrapping="WrapWithOverflow" Width="220" Height="35" Background="#393C40"  >
+                    </TextBox>
+                    <Button x:Name="cancleButton" Width="35" Height="35" Background="#393C40" BorderThickness="0" Command ="{Binding cancleButton}">
+                        <Image Source="/Images/img_cancle2.png" Height="19"/>
+                    </Button>
+                    <Button x:Name="searchButton" Width="35" Height="35" Background="#282B2F" BorderBrush="#0BCDFF" Command ="{Binding searchButton}">
+                        <Image Source="/Images/img_search2.png"/>
+                    </Button>
+
+                </StackPanel>
+                
+            </Grid>
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+                <Button Style="{DynamicResource RoundButton}" Grid.Column="0" Name="shuffleMusic"  
+                    Command ="{Binding shuffleList}"
+                    HorizontalAlignment="Left" Margin="40,5,60,0"  Width="150" Height="35" Background="#0BCDFF" BorderBrush="#282B2F" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/img_shuffle_music.png"  Width="25" Margin="0,0,0,0" />
+                        <TextBlock Text="Shuffle and play" Style="{StaticResource Text_Style}"  VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                </Button>
                 <Button Name="AddVideo" Style="{DynamicResource RoundButton}" HorizontalAlignment="Right" Margin="0,16,60,0" Grid.Column="1" Width="120" Height="40" Background="#393C40" BorderBrush="#212529"  Command="{Binding addVideo}" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal"  >
                         <Image Source="/Images/img_add_video.png" Width="30" Margin="0,0,0,0" />
@@ -83,21 +112,10 @@
                     </StackPanel>
 
                 </Button>
-            </Grid>
-        </StackPanel>
-
-        <Button Style="{DynamicResource RoundButton}" Name="shuffleMusic"  
-                Command ="{Binding shuffleList}"
-                HorizontalAlignment="Left" Margin="40,5,60,0" Grid.Column="1" Width="150" Height="35" Background="#0BCDFF" BorderBrush="#282B2F" >
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Images/img_shuffle_music.png"  Width="25" Margin="0,0,0,0" />
-                <TextBlock Text="Shuffle and play" Style="{StaticResource Text_Style}"  VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="5,0,0,0"/>
-            </StackPanel>
-
-        </Button>
-
-        <ListView Name="VideoList" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      Background="#282B2F" BorderBrush="#282B2F" SelectedIndex="{Binding selectedIndex}"
+        </Grid>
+        
+        <ListView Name="VideoList" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="400"
+                      Background="#282B2F" BorderBrush="#282B2F" SelectedIndex="{Binding selectedIndex}" ScrollViewer.CanContentScroll="True"
                   
                  >
             <ListView.ItemsPanel>

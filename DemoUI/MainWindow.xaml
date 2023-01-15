@@ -13,23 +13,12 @@
             <RowDefinition Height="150"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Background="#282B2F" Grid.Row="0" >
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+            
                 <StackPanel Orientation="Horizontal"  Grid.Column="0">
                     <Image Source="/Images/img_logo.png" Height="30" Margin="10" HorizontalAlignment="Left"/>
                     <TextBlock Text="Media Player" Style="{StaticResource Text_Style}" Margin="2" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,50,0">
-                    <TextBox x:Name="keywordTextBox"   Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" TextWrapping="WrapWithOverflow" Width="250" Height="35" Background="#393C40" BorderBrush="#0BCDFF"/>
-                    <Button x:Name="searchButton" Width="35" Height="35" BorderBrush="#0BCDFF" Background="#282B2F" Margin="0,5,0,5" >
-                        <Image Source="/Images/img_search2.png"/>
-                    </Button>
-
-                </StackPanel>
-            </Grid>
+                
             <Image Source="/Images/img_line.png"/>
             <Grid Height="500">
                 <Grid.ColumnDefinitions>
@@ -163,16 +152,18 @@
                             <Image Source="/Images/img_pre.png" Width="35" Height="35"></Image>
                         </Button>
                         <Button x:Name="playButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"   HorizontalAlignment="Left" VerticalAlignment="Center"
-                                Command ="{Binding playMediaButton}"
+                                Command ="{Binding playMediaButton}" 
                                 >
-                            <Image Source="/Images/img_play.png" Width="35" Height="35"></Image>
+                            <Image Source="{Binding imagePlayBtn}" Width="35" Height="35"></Image>
                         </Button>
+                        <!--
                         <Button x:Name="stopButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center"
                                 Command="{Binding pauseMediaButton}"
                                 
                                 >
                             <Image Source="/Images/img_pause.png" Width="35" Height="35"></Image>
                         </Button>
+                        -->
                         <Button x:Name="nextButton" Width="45" Height="45" BorderBrush="#212529" Background="#212529" Margin="10,0,10,0"  HorizontalAlignment="Left" VerticalAlignment="Center" 
                                 Command ="{Binding nextMediaButton}"
                                 >

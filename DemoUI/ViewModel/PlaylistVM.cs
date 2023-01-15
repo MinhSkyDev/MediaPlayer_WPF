@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Text.Json;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TagLib.Ape;
 using TagLib.Tiff;
+using File = System.IO.File;
 
 namespace DemoUI.ViewModel
 {
@@ -21,37 +25,33 @@ namespace DemoUI.ViewModel
 
         public ICommand NewPlaylist { get; }
 
-        public ICommand doubleClickMusic { get; set; }
+        public ICommand doubleClickPlaylist { get; set; }
+        public ICommand searchButton { get; set; }
+        public ICommand cancleButton { get; set; }
 
         //Cặp event delegate dùng để pass dữ liệu qua màn hình chính, nơi mà data context là NavigationVM
-        public delegate void passDataMusic(Model.Media data);
-        public event passDataMusic passToNavigationMusic;
+        public delegate void passPathPlaylist(string path, string title);
+        public event passPathPlaylist passToNavigationPath;
 
-        public delegate void NavigateToPlayer();
-        public event NavigateToPlayer navigateToPlayer;
+        public delegate void NavigateToMusic();
+        public event NavigateToMusic navigateToMusic;
 
         //Implement get set here to invoke "Selection Change Event"
-        private object _selectedItemMusic;
-        public object selectedItemMusic
+        private object _selectedItemPlaylist;
+        public object selectedItemPlaylist
         {
             get
             {
-                return _selectedItemMusic;
+                return _selectedItemPlaylist;
             }
             set
             {
                 // Cài đặt hàm set cho selectedItemMusic là vì selectedItemMusic được binding với item được chọn trong ListView, '
                 // vì thế mỗi khi gọi hàm set là tương ứng với việc là item được chọn trong ListView vừa mới bị thay đổi
-                if (_selectedItemMusic == value)
+                if (_selectedItemPlaylist == value)
                     return;
-                //Gán cho _selectedItemMusic hiện tại, ép kiểu về Model.Music để xử lý
-                _selectedItemMusic = value;
-                Model.Music currentMusic = (Model.Music)value;
-                //title = currentMusic.Name;
-
-                //Thay đổi xong thì truyền dữ liệu qua cho màn hình chính
-                passToNavigationMusic?.Invoke(currentMusic);
-
+                
+                _selectedItemPlaylist = value;
             }
         }
 
@@ -62,16 +62,18 @@ namespace DemoUI.ViewModel
         public ObservableCollection<Model.Music> musics { get; set; }
 
         public ObservableCollection<Model.Playlist> _playlist { get; set; }
+
+        public ObservableCollection<Model.Playlist> temp { get; set; }
+        public ObservableCollection<Model.Playlist> _subItems { get; set; }
         public PlaylistVM(NavigationVM navigation)
         {
-
-            title = "Music"; // ?
-            //doubleClickMusic = new RelayCommand(doubleClickMusic_button);
+            doubleClickPlaylist = new RelayCommand(doubleClickPlaylist_button);
             NewPlaylist = new RelayCommand(newPlaylist_button);
-
             _playlist = new ObservableCollection<Model.Playlist>();
+            searchButton = new RelayCommand(getsearch);
+            cancleButton = new RelayCommand(clearsearch);
+            temp = new ObservableCollection<Model.Playlist>();
             AllPlaylist();
-
             this.navigation = navigation;
 
         }
@@ -89,31 +91,49 @@ namespace DemoUI.ViewModel
                 Directory.CreateDirectory(path);
             }
 
-            string[] playlists = Directory.GetDirectories(path, "*", SearchOption.AllDirectories);
-
-            foreach (string playlist in playlists)
+            DirectoryInfo MyPlaylist = new DirectoryInfo(path);
+            FileInfo[] playlists = MyPlaylist.GetFiles("*");
+            foreach(FileInfo playlist in playlists)
             {
-                DirectoryInfo folder = new DirectoryInfo(playlist);
-                _playlist.Add(new Model.Playlist(folder));
-                
-                FileInfo[] items = folder.GetFiles("*");
-                string numberOfitem = items.Length.ToString();
-                string uri = folder.FullName;
-                string name = folder.Name;
+                _playlist.Add(new Model.Playlist(playlist));
+                temp.Add(new Model.Playlist(playlist));
             }
+
+            //string[] playlists = Directory.GetDirectories(path, "*", SearchOption.AllDirectories);
+
+            //foreach (string playlist in playlists)
+            //{
+            //    DirectoryInfo folder = new DirectoryInfo(playlist);
+            //    _playlist.Add(new Model.Playlist(folder));
+            //    temp.Add(new Model.Playlist(folder));
+            //}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public string _keyword;
+        public string Keyword
+        {
+            get { return _keyword; }
+            set
+            {
+                _keyword = value;
+                OnPropertyChanged(nameof(Keyword));
+            }
+        }
 
         //Hàm này dùng để bắt event doubleClick trên ListView Item, mục đích là để play music
-        private void doubleClickMusic_button(object obj)
+        private void doubleClickPlaylist_button(object obj)
         {
-            Model.Music currentMusic = (Model.Music)selectedItemMusic;
-            //Chọn xong truyền dữ liệu qua màn hình chính trước
-            passToNavigationMusic?.Invoke(currentMusic);
-            //Rồi sau đó invoke để chuyển màn hình sang MediaPlayer
-            navigateToPlayer?.Invoke();
+            Model.Playlist currentPlaylist = (Model.Playlist)selectedItemPlaylist;
+            title = currentPlaylist.name;
+            //truyền dữ liệu qua màn hình chính
+            passToNavigationPath?.Invoke(path, title);
+            //Rồi sau đó invoke để chuyển màn hình sang Music
+            navigateToMusic?.Invoke();
         }
 
         private void newPlaylist_button(object obj)
@@ -125,17 +145,19 @@ namespace DemoUI.ViewModel
                 string playlistName = screen.Keyword;
                 if (playlistName != null)
                 {
-                    string newPlaylist = path + @"\" + playlistName;
-                    if (Directory.Exists(newPlaylist))
+                    string newPlaylist = path + @"\" + playlistName + ".txt";
+                    string temp = path + @"\" + playlistName;
+                    if (File.Exists(newPlaylist))
                     {
                         int count = 2;
-                        while (Directory.Exists(newPlaylist + " " + count.ToString()))
+                        while (File.Exists(temp + " " + count.ToString() + ".txt"))
                             count++;
-                        newPlaylist += " " + count.ToString();
+                        newPlaylist = temp + count.ToString() + ".txt";
                         playlistName += " " + count.ToString();
                         
                     }
-                    Directory.CreateDirectory(newPlaylist);
+                    //Directory.CreateDirectory(newPlaylist);
+                    File.Create(newPlaylist);
                     _playlist.Add(new Model.Playlist(playlistName));
 
                 }
@@ -144,6 +166,21 @@ namespace DemoUI.ViewModel
             {
                 // Do nothing
             }
+        }
+
+        private void getsearch(object obj)
+        {
+            _subItems = new ObservableCollection<Model.Playlist>(temp.Where(
+               sv => sv.name.Contains(Keyword)
+           ).ToList());
+            _playlist = _subItems;
+        }
+
+        private void clearsearch(object obj)
+        {
+            Keyword = "";
+            _subItems = new ObservableCollection<Model.Playlist>(temp.Where(x => x.name.Contains("")).ToList());
+            _playlist = _subItems;
         }
     }
 }

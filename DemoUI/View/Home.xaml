@@ -134,7 +134,7 @@
         <TextBlock Grid.Column="0" Text="Video" Style="{StaticResource Text_Style}" FontSize="15" Margin="40,10,0,10" FontWeight="Bold"></TextBlock>
 
 
-        <ListView Name="VideoList" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+        <ListView Name="VideoList" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="400"
                       Background="#282B2F" BorderBrush="#282B2F" SelectedIndex="{Binding selectedIndex}"
                   
                  >

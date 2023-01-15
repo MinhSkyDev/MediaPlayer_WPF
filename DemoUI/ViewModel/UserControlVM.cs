@@ -19,6 +19,7 @@ namespace DemoUI.ViewModel
 
         public DispatcherTimer timer;
 
+        private bool _playing = false;
 
         private MediaElement mediaPlayer = new MediaElement();
 
@@ -40,6 +41,8 @@ namespace DemoUI.ViewModel
         public delegate void PassMediaDurationToNavigation(string duration);
         public event PassMediaDurationToNavigation passMediaDurationToNavigation;
 
+        public delegate void PassMediaDurationToNavigation2(double duration);
+        public event PassMediaDurationToNavigation2 passMediaDurationToNavigation2;
        
 
         public UserControlVM()
@@ -75,7 +78,6 @@ namespace DemoUI.ViewModel
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0,0,0,1,0);
             timer.Tick += time_ticker;
-
         }
 
         private void time_ticker(object sender, EventArgs e)
@@ -93,6 +95,7 @@ namespace DemoUI.ViewModel
                 totalPosition = $"0{hours}:0{minutes}:{seconds}";
             }
 
+            passMediaDurationToNavigation2?.Invoke(mediaPlayer.Position.TotalSeconds);
             passMediaDurationToNavigation?.Invoke(totalPosition);
         }
 
@@ -102,8 +105,33 @@ namespace DemoUI.ViewModel
             mediaPlayer.Position = newPosition;
         }
 
+        
+
+        public string playVideoImprove()
+        {
+            string result = "";
+            if (_playing)
+            {
+                mediaPlayer.Pause();
+                timer.Stop();
+                _playing = false;
+                result = @"\Images\img_play.png";
+            }
+            else
+            {
+                mediaPlayer.LoadedBehavior = MediaState.Manual;
+                mediaPlayer.Play();
+                timer.Start();
+                _playing = true;
+                result = @"\Images\img_pause.png";
+            }
+
+            return result;
+        }
+
         public void playVideo()
         {
+            mediaPlayer.LoadedBehavior = MediaState.Manual;
             mediaPlayer.Play();
             timer.Start();
         }
