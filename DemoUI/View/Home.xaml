@@ -82,18 +82,77 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ListView Name="employeeList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      Background="#282B2F" BorderBrush="#282B2F">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                    <Border Margin="15,20,5,0">
+
+        <TextBlock Grid.Column="0" Text="Music" Style="{StaticResource Text_Style}" FontSize="15" Margin="40,10,0,10" FontWeight="Bold"></TextBlock>
+
+
+        <ListView Name="MusicList" ItemsSource="{Binding musics}" SelectedItem="{Binding selectedItemMusic}" SelectedIndex="{Binding selectedIndex}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Background="#282B2F" BorderBrush="#282B2F" Margin="0,20,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border >
+                        <StackPanel Height="40" Width="1300" Background="#282B2F" HorizontalAlignment="Center">
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickMusic, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Background="#282B2F" BorderBrush="#282B2F" Margin="0,5,0,0">
+                                    <Image Source="/Images/img_play2.png" Width="30"/>
+                                </Button>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" >
+                                      <Run Text="{Binding name}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="SemiBold"/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                                          <Run Text="{Binding Singer}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                                          <Run Text="{Binding Year}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="4" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                                          <Run Text="{Binding duration}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                </TextBlock>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Grid.Column="0" Text="Video" Style="{StaticResource Text_Style}" FontSize="15" Margin="40,10,0,10" FontWeight="Bold"></TextBlock>
+
+
+        <ListView Name="VideoList" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Background="#282B2F" BorderBrush="#282B2F" SelectedIndex="{Binding selectedIndex}"
+                  
+                 >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+
+                    <Border>
                         <StackPanel Height="250" Width="200" Background="#282B2F" >
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickVideo, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
                             <Border Width="190" Height="190" BorderBrush="#282B2F" Margin="0,5,0,0">
                                 <Border.Background>
                                     <ImageBrush ImageSource="{Binding CoverPath}"></ImageBrush>
@@ -105,15 +164,108 @@
                             </Border>
 
                             <TextBlock HorizontalAlignment="Center" Margin="0,7,0,0" >
-                                  <Run Text="{Binding Name}" Style="{StaticResource TextBinding_Style}" FontSize="15" FontWeight="Medium"/>
+                                  <Run Text="{Binding name}" Style="{StaticResource TextBinding_Style}" FontSize="15" FontWeight="Medium"/>
                             </TextBlock>
                             <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" >
-                                      <Run Text="{Binding Singer}" Style="{StaticResource TextBinding_Style}" FontSize="15"  FontStretch="Medium" FontWeight="Light"/>
+                                      <Run Text="{Binding uri}" Style="{StaticResource TextBinding_Style}" FontSize="15"  FontStretch="Medium" FontWeight="Light"/>
                             </TextBlock>
                         </StackPanel>
                     </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
+
+        <TextBlock Grid.Column="0" Text="Recently Played" Style="{StaticResource Text_Style}" FontSize="30" Margin="40,20,0,10" FontWeight="Bold"></TextBlock>
+        <TextBlock Grid.Column="0" Text="Music" Style="{StaticResource Text_Style}" FontSize="15" Margin="40,10,0,10" FontWeight="Bold"></TextBlock>
+        <ListView Name="MusicListRecently" ItemsSource="{Binding musics}" SelectedItem="{Binding selectedItemMusic}" SelectedIndex="{Binding selectedIndex}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Background="#282B2F" BorderBrush="#282B2F" Margin="0,20,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border >
+                        <StackPanel Height="40" Width="1300" Background="#282B2F" HorizontalAlignment="Center">
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickMusic, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="300"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Background="#282B2F" BorderBrush="#282B2F" Margin="0,5,0,0">
+                                    <Image Source="/Images/img_play2.png" Width="30"/>
+                                </Button>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" >
+                                      <Run Text="{Binding name}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="SemiBold"/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                                          <Run Text="{Binding Singer}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                                          <Run Text="{Binding Year}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="4" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                                          <Run Text="{Binding duration}" FontSize="15" Style="{StaticResource TextBinding_Style}"  FontWeight="Light"/>
+                                </TextBlock>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Grid.Column="0" Text="Video" Style="{StaticResource Text_Style}" FontSize="15" Margin="40,10,0,10" FontWeight="Bold"></TextBlock>
+
+
+        <ListView Name="VideoListRecently" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Background="#282B2F" BorderBrush="#282B2F" SelectedIndex="{Binding selectedIndex}"
+                  
+                 >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+
+                    <Border>
+                        <StackPanel Height="250" Width="200" Background="#282B2F" >
+                            <StackPanel.InputBindings>
+                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=DataContext.doubleClickVideo, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                            </StackPanel.InputBindings>
+                            <Border Width="190" Height="190" BorderBrush="#282B2F" Margin="0,5,0,0">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding CoverPath}"></ImageBrush>
+                                </Border.Background>
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="270" Color="#282B2F">
+                                    </DropShadowEffect>
+                                </Border.Effect>
+                            </Border>
+
+                            <TextBlock HorizontalAlignment="Center" Margin="0,7,0,0" >
+                                  <Run Text="{Binding name}" Style="{StaticResource TextBinding_Style}" FontSize="15" FontWeight="Medium"/>
+                            </TextBlock>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" >
+                                      <Run Text="{Binding uri}" Style="{StaticResource TextBinding_Style}" FontSize="15"  FontStretch="Medium" FontWeight="Light"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
     </StackPanel>
 </UserControl>

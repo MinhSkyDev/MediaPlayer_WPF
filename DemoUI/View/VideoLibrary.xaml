@@ -99,11 +99,7 @@
         <ListView Name="VideoList" ItemsSource="{Binding videos}" SelectedItem="{Binding selectedItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       Background="#282B2F" BorderBrush="#282B2F" SelectedIndex="{Binding selectedIndex}"
                   
-                  >
-            
-            
-            
-            
+                 >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />

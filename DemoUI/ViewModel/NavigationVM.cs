@@ -77,16 +77,22 @@ namespace DemoUI.ViewModel
             prototype_view.Add("VideoLibrary", new VideoLibraryVM(this));
             prototype_view.Add("UserControl", new UserControlVM());
             
-
+            HomeVM homeVM = (HomeVM)prototype_view["Home"];
+            
 
             //Inject event here
             VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
             videoLibraryVM.passToNavigation += setInfoFromMedia;
             videoLibraryVM.navigateToPlayer += navigateToMediaPlayer;
+            //Assign ObservableCollection của Video cho Home
+            homeVM.videos = videoLibraryVM.videos;
+
 
             MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
             musicLibraryVM.passToNavigationMusic += setInfoFromMedia;
             musicLibraryVM.navigateToPlayer += navigateToMediaPlayer;
+            homeVM.musics = musicLibraryVM.musics;
+
 
 
             UserControlVM userControl1 = (UserControlVM)prototype_view["UserControl"];
