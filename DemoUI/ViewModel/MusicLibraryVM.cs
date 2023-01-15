@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Text.Json;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -201,16 +202,40 @@ namespace DemoUI.ViewModel
             DirectoryInfo playlist = new DirectoryInfo(path + @"\" + title);
             FileInfo[] items = playlist.GetFiles("*");
             musics.Clear();
-            foreach (FileInfo item in items)
+            if (title != "Recent Music")
             {
-                string music_name = item.Name;
-                Model.Music currentMusic = new Model.Music(item);
+                foreach (FileInfo item in items)
+                {
+                    string music_name = item.Name;
+                    Model.Music currentMusic = new Model.Music(item);
 
-                //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
-                musics.Add(currentMusic);
-                passToNavigationMusic?.Invoke(currentMusic);
+                    //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                    musics.Add(currentMusic);
+                    passToNavigationMusic?.Invoke(currentMusic);
+                }
             }
+            else
+            {
+                string fileName = "statusPlayingMedia.json";
+                string jsonStringReading = File.ReadAllText(fileName);
 
+                if (jsonStringReading != "")
+                {
+                    StatusMedia recentMedia = JsonSerializer.Deserialize<StatusMedia>(jsonStringReading);
+
+                    string music_path_uri = recentMedia.uriMedia;
+                    if (music_path_uri != "" && recentMedia.typeMedia == "MusicLibrary")
+                    {
+                        FileInfo musicInfo = new FileInfo(music_path_uri);
+                        string music_name = musicInfo.Name;
+                        Model.Music currentMusic = new Model.Music(musicInfo);
+
+                        //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                        musics.Add(currentMusic);
+                        passToNavigationMusic?.Invoke(currentMusic);
+                    }
+                }
+            }
         }
     }
 
