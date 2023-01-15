@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
 using DemoUI.Utilities;
 using System.Windows.Input;
 using DemoUI.Model;
@@ -120,7 +122,8 @@ namespace DemoUI.ViewModel
             // Startup Page
             CurrentView = prototype_view["Home"];
 
-
+            string fileName = "statusPlayingMedia.json";
+            File.WriteAllText(fileName, "");
         }
 
         public void setPathPlaylist(string path, string title)
@@ -156,14 +159,57 @@ namespace DemoUI.ViewModel
             CurrentView = SelectedPlaylist;
         }
 
+        private void WritingMediaStatusIsPlaying(Media playingMedia)
+        {
+            string type = playingMedia.getType();
+
+            string uriMedia = playingMedia.uri; ;
+            string nameMedia = playingMedia.name;
+            string durationMedia = playingMedia.duration;
+            string singerMedia = "";
+            string yearMedia = "";
+            //BitmapImage coverPathMedia = new BitmapImage();
+
+            if (type.Equals("MusicLibrary"))
+            {
+                singerMedia = ((Music)playingMedia).Singer;
+                yearMedia = ((Music)playingMedia).Year;
+            }
+            else if (type.Equals("VideoLibrary"))
+            {
+                singerMedia = ((Video)playingMedia).singer;
+                //coverPathMedia = ((Video)playingMedia).CoverPath;
+            }
+            else
+            {
+                //Do nothing
+            }
+
+            var statusPlayingMedia = new StatusMedia()
+            {
+                dateMedia = DateTime.Now,
+                typeMedia = type,
+                uriMedia = uriMedia,
+                nameMedia = nameMedia,
+                durationMedia = durationMedia,
+                singerMedia = singerMedia,
+                yearMedia = yearMedia,
+                //coverPathMedia = coverPathMedia
+            };
+
+            string fileName = "statusPlayingMedia.json";
+            string jsonStringWriting = JsonSerializer.Serialize(statusPlayingMedia);
+            File.WriteAllText(fileName, jsonStringWriting);
+        }
+
         void playButton_command(Object obj)
         {
             UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.playVideo();
+            WritingMediaStatusIsPlaying(currentMedia);
             sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
             sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
         }
-
 
         void nextMedia_command(Object obj)
         {

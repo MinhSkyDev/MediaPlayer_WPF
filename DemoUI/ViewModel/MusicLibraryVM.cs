@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Text.Json;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -251,33 +252,44 @@ namespace DemoUI.ViewModel
             //DirectoryInfo playlist = new DirectoryInfo(path + @"\" + title);
             FileInfo playlist = new FileInfo(this.path);
             musics.Clear();
-
-            using (StreamReader sr = playlist.OpenText())
+            if (title != "Recent Music")
             {
-                string item = "";
-                while ((item = sr.ReadLine()) != null)
+                using (StreamReader sr = playlist.OpenText())
                 {
-                    this.playlistItems.Add(item);
-                    FileInfo music = new FileInfo(item);
-                    Model.Music currentMusic = new Model.Music(music);
-
-                    //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
-                    musics.Add(currentMusic);
-                    passToNavigationMusic?.Invoke(currentMusic);
+                    string item = "";
+                    while ((item = sr.ReadLine()) != null)
+                    {
+                        this.playlistItems.Add(item);
+                        FileInfo music = new FileInfo(item);
+                        Model.Music currentMusic = new Model.Music(music);
+                        //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                        musics.Add(currentMusic);
+                        passToNavigationMusic?.Invoke(currentMusic);
+                    }
                 }
             }
+            else
+            {
+                string fileName = "statusPlayingMedia.json";
+                string jsonStringReading = File.ReadAllText(fileName);
 
+                if (jsonStringReading != "")
+                {
+                    StatusMedia recentMedia = JsonSerializer.Deserialize<StatusMedia>(jsonStringReading);
 
-            //foreach (FileInfo item in items)
-            //{
-            //    string music_name = item.Name;
-            //    Model.Music currentMusic = new Model.Music(item);
+                    string music_path_uri = recentMedia.uriMedia;
+                    if (music_path_uri != "" && recentMedia.typeMedia == "MusicLibrary")
+                    {
+                        FileInfo musicInfo = new FileInfo(music_path_uri);
+                        string music_name = musicInfo.Name;
+                        Model.Music currentMusic = new Model.Music(musicInfo);
 
-            //    //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
-            //    musics.Add(currentMusic);
-            //    passToNavigationMusic?.Invoke(currentMusic);
-            //}
-
+                        //Sau khi add song thì chuyển qua navigation vì hiện tại giao diện đang binding với NavigationVM
+                        musics.Add(currentMusic);
+                        passToNavigationMusic?.Invoke(currentMusic);
+                    }
+                }
+            }
         }
     }
 
