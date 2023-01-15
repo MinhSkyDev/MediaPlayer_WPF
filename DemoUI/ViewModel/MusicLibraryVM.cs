@@ -102,6 +102,21 @@ namespace DemoUI.ViewModel
             temp = new ObservableCollection<Model.Music>();
             this.navigation = navigation;
 
+
+            // Default Music
+            string myMusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            DirectoryInfo myMusicDirectory = new DirectoryInfo(myMusicPath);
+            string extension = ".mp3, .wma, .wav, .flac, .aac, .ogg, .aiff, .alac";
+            FileInfo[] musicInfos = myMusicDirectory.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo musicInfo in musicInfos)
+                if (extension.Contains(musicInfo.Extension))
+                {
+                    string music_name = musicInfo.Name;
+                    Model.Music currentMusic = new Model.Music(musicInfo);
+                    musics.Add(currentMusic);
+                    temp.Add(currentMusic);
+                    passToNavigationMusic?.Invoke(currentMusic);
+                }
         }
 
 
