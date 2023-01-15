@@ -71,11 +71,31 @@ namespace DemoUI.ViewModel
         public ICommand nextMediaButton { get; set; }
         public ICommand previousMediaButton { get; set; }
 
-        private void Home(object obj) => CurrentView = prototype_view["Home"];
-        private void MusicLibrary(object obj) => CurrentView = prototype_view["MusicLibrary"];
-        private void VideoLibrary(object obj) => CurrentView = prototype_view["VideoLibrary"];
-        private void Playlist(object obj) => CurrentView = prototype_view["Playlist"];
-        private void Playing(object obj) => CurrentView = prototype_view["UserControl"];
+        private void Home(object obj)
+        {
+            CurrentView = prototype_view["Home"];
+            imagePlayBtn = @"\Images\img_play.png";
+        }
+        private void MusicLibrary(object obj)
+        {
+            CurrentView = prototype_view["MusicLibrary"];
+            imagePlayBtn = @"\Images\img_play.png";
+        }
+        private void VideoLibrary(object obj)
+        {
+            CurrentView = prototype_view["VideoLibrary"];
+            imagePlayBtn = @"\Images\img_play.png";
+        }
+        private void Playlist(object obj)
+        {
+            CurrentView = prototype_view["Playlist"];
+            imagePlayBtn = @"\Images\img_play.png";
+        }
+        private void Playing(object obj)
+        {
+            CurrentView = prototype_view["UserControl"];
+            imagePlayBtn = @"\Images\img_play.png";
+        }
 
         // Playlist được chọn
         private void SelectedPlaylist(object obj) => CurrentView = prototype_view["SelectedPlaylist"];
@@ -152,6 +172,7 @@ namespace DemoUI.ViewModel
         {
             userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.setData(currentMedia.name, currentMedia.duration, currentMedia.uri);
+            imagePlayBtn = @"\Images\img_play.png";
             CurrentView = userControl;
 
         }
