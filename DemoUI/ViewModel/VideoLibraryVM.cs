@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace DemoUI.ViewModel
 {
@@ -93,6 +94,22 @@ namespace DemoUI.ViewModel
             temp = new ObservableCollection<Model.Video>();
             this.navigation = navigation;
 
+            // Default Video
+            string myVideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            DirectoryInfo myVideoDirectory = new DirectoryInfo(myVideoPath);
+            string extension = "Video files |*.wmv; *.3g2; *.3gp; *.3gp2; *.3gpp; *.amv; *.asf;  *.avi; *.bin; *.cue; *.divx; *.dv; *.flv; *.gxf; *.iso; *.m1v; *.m2v; *.m2t; *.m2ts; *.m4v; " +
+                          " *.mkv; *.mov; *.mp2; *.mp2v; *.mp4; *.mp4v; *.mpa; *.mpe; *.mpeg; *.mpeg1; *.mpeg2; *.mpeg4; *.mpg; *.mpv2; *.mts; *.nsv; *.nuv; *.ogg; *.ogm; *.ogv; *.ogx; *.ps; *.rec; *.rm; *.rmvb; *.tod; *.ts; *.tts; *.vob; *.vro; *.webm; *.dat; ";
+            FileInfo[] videoInfos = myVideoDirectory.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo videoInfo in videoInfos)
+                if (extension.Contains(videoInfo.Extension))
+                {
+                    string video_name = videoInfo.Name;
+                    Model.Video currentVideo = new Model.Video(videoInfo);
+                    videos.Add(currentVideo);
+                    temp.Add(currentVideo);
+                    passToNavigation?.Invoke(currentVideo);
+                }
+
         }
 
 
@@ -161,9 +178,9 @@ namespace DemoUI.ViewModel
             }
         }
 
-        public Media getNextMedia()
+        public Model.Media getNextMedia()
         {
-            Media result = null;
+            Model.Media result = null;
 
             int currentListSize = videos.Count;
             int nextIndex = selectedIndex + 1;
@@ -176,9 +193,9 @@ namespace DemoUI.ViewModel
             return result;
         }
 
-        public Media getPreviousMedia()
+        public Model.Media getPreviousMedia()
         {
-            Media result = null;
+            Model.Media result = null;
 
             int currentListSize = videos.Count;
             int previousIndex = selectedIndex - 1;
@@ -198,7 +215,7 @@ namespace DemoUI.ViewModel
         }
         private void getsearch(object obj)
         {
-            _subItems = new ObservableCollection<Video>(temp.Where(
+            _subItems = new ObservableCollection<Model.Video>(temp.Where(
                sv => sv.name.Contains(Keyword)
            ).ToList());
             videos = _subItems;
@@ -207,7 +224,7 @@ namespace DemoUI.ViewModel
         private void clearsearch(object obj)
         {
             Keyword = "";
-            _subItems = new ObservableCollection<Video>(temp.Where(x => x.name.Contains("")).ToList());
+            _subItems = new ObservableCollection<Model.Video>(temp.Where(x => x.name.Contains("")).ToList());
             videos = _subItems;
         }
     }

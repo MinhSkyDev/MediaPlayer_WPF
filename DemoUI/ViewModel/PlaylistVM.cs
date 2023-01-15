@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Text.Json;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TagLib.Ape;
 using TagLib.Tiff;
+using File = System.IO.File;
 
 namespace DemoUI.ViewModel
 {
@@ -89,18 +91,22 @@ namespace DemoUI.ViewModel
                 Directory.CreateDirectory(path);
             }
 
-            string[] playlists = Directory.GetDirectories(path, "*", SearchOption.AllDirectories);
-
-            foreach (string playlist in playlists)
+            DirectoryInfo MyPlaylist = new DirectoryInfo(path);
+            FileInfo[] playlists = MyPlaylist.GetFiles("*");
+            foreach(FileInfo playlist in playlists)
             {
-                DirectoryInfo folder = new DirectoryInfo(playlist);
-                _playlist.Add(new Model.Playlist(folder));
-                temp.Add(new Model.Playlist(folder));
-                //FileInfo[] items = folder.GetFiles("*");
-                //string numberOfitem = items.Length.ToString();
-                //string uri = folder.FullName;
-                //string name = folder.Name;
+                _playlist.Add(new Model.Playlist(playlist));
+                temp.Add(new Model.Playlist(playlist));
             }
+
+            //string[] playlists = Directory.GetDirectories(path, "*", SearchOption.AllDirectories);
+
+            //foreach (string playlist in playlists)
+            //{
+            //    DirectoryInfo folder = new DirectoryInfo(playlist);
+            //    _playlist.Add(new Model.Playlist(folder));
+            //    temp.Add(new Model.Playlist(folder));
+            //}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -139,17 +145,19 @@ namespace DemoUI.ViewModel
                 string playlistName = screen.Keyword;
                 if (playlistName != null)
                 {
-                    string newPlaylist = path + @"\" + playlistName;
-                    if (Directory.Exists(newPlaylist))
+                    string newPlaylist = path + @"\" + playlistName + ".txt";
+                    string temp = path + @"\" + playlistName;
+                    if (File.Exists(newPlaylist))
                     {
                         int count = 2;
-                        while (Directory.Exists(newPlaylist + " " + count.ToString()))
+                        while (File.Exists(temp + " " + count.ToString() + ".txt"))
                             count++;
-                        newPlaylist += " " + count.ToString();
+                        newPlaylist = temp + count.ToString() + ".txt";
                         playlistName += " " + count.ToString();
                         
                     }
-                    Directory.CreateDirectory(newPlaylist);
+                    //Directory.CreateDirectory(newPlaylist);
+                    File.Create(newPlaylist);
                     _playlist.Add(new Model.Playlist(playlistName));
 
                 }
