@@ -9,6 +9,7 @@ using DemoUI.Utilities;
 using System.Windows.Input;
 using DemoUI.Model;
 using DemoUI.View;
+using System.Windows.Threading;
 
 namespace DemoUI.ViewModel
 {
@@ -106,7 +107,7 @@ namespace DemoUI.ViewModel
 
             UserControlVM userControl1 = (UserControlVM)prototype_view["UserControl"];
             userControl1.passMediaDurationToNavigation += setCurrentDuration;
-
+            userControl1.passMediaDurationToNavigation2 += setSliderValue;
 
             PlaylistVM playListVM = (PlaylistVM)prototype_view["Playlist"];
             playListVM.passToNavigationPath += setPathPlaylist;
@@ -143,13 +144,13 @@ namespace DemoUI.ViewModel
             this.currentMedia = media;
         }
 
-
+        private UserControlVM userControl;
         /// <summary>
         /// Bắn dữ liệu Media đang chơi hiện tại và chuyển view sang trình chơi Media
         /// </summary>
         public void navigateToMediaPlayer()
         {
-            UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+            userControl = (UserControlVM)prototype_view["UserControl"];
             userControl.setData(currentMedia.name, currentMedia.duration, currentMedia.uri);
             CurrentView = userControl;
 
@@ -205,15 +206,23 @@ namespace DemoUI.ViewModel
             File.WriteAllText(fileName, jsonStringWriting);
         }
 
+        public DispatcherTimer timer;
+
         void playButton_command(Object obj)
         {
             if (currentMedia != null)
             {
-                UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+                //userControl = (UserControlVM)prototype_view["UserControl"];
                 imagePlayBtn = userControl.playVideoImprove();
+
+                //Image pause tức gợi ý người dùng thao tác pause -> video/music đang play
+                if (imagePlayBtn.Contains("pause"))
+                {
+
+                }
                 WritingMediaStatusIsPlaying(currentMedia);
                 sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
+                //sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
             }    
         }
 
@@ -309,6 +318,11 @@ namespace DemoUI.ViewModel
         public void setCurrentDuration(string duration)
         {
             this.currentDuration = duration;
+        }
+
+        public void setSliderValue(double duration)
+        {
+            this.sliderValue = duration;
         }
     }
 

@@ -45,6 +45,8 @@ namespace DemoUI.ViewModel
         public delegate void PassMediaDurationToNavigation(string duration);
         public event PassMediaDurationToNavigation passMediaDurationToNavigation;
 
+        public delegate void PassMediaDurationToNavigation2(double duration);
+        public event PassMediaDurationToNavigation2 passMediaDurationToNavigation2;
        
 
         public UserControlVM()
@@ -97,6 +99,7 @@ namespace DemoUI.ViewModel
                 totalPosition = $"0{hours}:0{minutes}:{seconds}";
             }
 
+            passMediaDurationToNavigation2?.Invoke(mediaPlayer.Position.TotalSeconds);
             passMediaDurationToNavigation?.Invoke(totalPosition);
         }
 
@@ -106,12 +109,7 @@ namespace DemoUI.ViewModel
             mediaPlayer.Position = newPosition;
         }
 
-        public void playVideo()
-        {
-            mediaPlayer.LoadedBehavior = MediaState.Manual;
-            mediaPlayer.Play();
-            timer.Start();
-        }
+        
 
         public string playVideoImprove()
         {
@@ -133,6 +131,13 @@ namespace DemoUI.ViewModel
             }
 
             return result;
+        }
+
+        public void playVideo()
+        {
+            mediaPlayer.LoadedBehavior = MediaState.Manual;
+            mediaPlayer.Play();
+            timer.Start();
         }
 
         public void pauseVideo()
