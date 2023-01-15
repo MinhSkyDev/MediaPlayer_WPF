@@ -204,90 +204,102 @@ namespace DemoUI.ViewModel
 
         void playButton_command(Object obj)
         {
-            UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
-            userControl.playVideo();
-            WritingMediaStatusIsPlaying(currentMedia);
-            sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-            sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
+            if (currentMedia != null)
+            {
+                UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+                userControl.playVideo();
+                WritingMediaStatusIsPlaying(currentMedia);
+                sliderValueMaximum = userControl.MEDIAPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                sliderValue = userControl.MEDIAPlayer.Position.TotalSeconds;
+            }    
         }
 
         void nextMedia_command(Object obj)
         {
-            string type = currentMedia.getType();
-            if (type.Equals("VideoLibrary"))
+            if (currentMedia != null)
             {
-                VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
-                Media nextMedia = videoLibraryVM.getNextMedia();
-
-                if (nextMedia != null)
+                string type = currentMedia.getType();
+                if (type.Equals("VideoLibrary"))
                 {
-                    currentMedia = nextMedia;
-                    videoLibraryVM.selectedIndex += 1;
-                    navigateToMediaPlayer();
+                    VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
+                    Media nextMedia = videoLibraryVM.getNextMedia();
+
+                    if (nextMedia != null)
+                    {
+                        currentMedia = nextMedia;
+                        videoLibraryVM.selectedIndex += 1;
+                        navigateToMediaPlayer();
+                    }
+
+                }
+                else if (type.Equals("MusicLibrary"))
+                {
+                    MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view[type];
+                    Media nextMedia = musicLibraryVM.getNextMedia();
+
+                    if (nextMedia != null)
+                    {
+                        currentMedia = nextMedia;
+                        musicLibraryVM.selectedIndex += 1;
+                        navigateToMediaPlayer();
+                    }
+                }
+                else
+                {
+                    //Do nothing
                 }
 
+                this.setInfoFromMedia(currentMedia);
             }
-            else if (type.Equals("MusicLibrary"))
-            {
-                MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view[type];
-                Media nextMedia = musicLibraryVM.getNextMedia();
-
-                if (nextMedia != null)
-                {
-                    currentMedia = nextMedia;
-                    musicLibraryVM.selectedIndex += 1;
-                    navigateToMediaPlayer();
-                }
-            }
-            else
-            {
-                //Do nothing
-            }
-
-            this.setInfoFromMedia(currentMedia);
         }
 
         void previousMedia_command(Object obj)
         {
-            string type = currentMedia.getType();
-            if (type.Equals("VideoLibrary"))
+            if (currentMedia != null)
             {
-                VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
-                Media previousMedia = videoLibraryVM.getPreviousMedia();
-
-                if (previousMedia != null)
+                string type = currentMedia.getType();
+                if (type.Equals("VideoLibrary"))
                 {
-                    currentMedia = previousMedia;
+                    VideoLibraryVM videoLibraryVM = (VideoLibraryVM)prototype_view["VideoLibrary"];
+                    Media previousMedia = videoLibraryVM.getPreviousMedia();
 
-                    videoLibraryVM.selectedIndex -= 1;
-                    navigateToMediaPlayer();
+                    if (previousMedia != null)
+                    {
+                        currentMedia = previousMedia;
+
+                        videoLibraryVM.selectedIndex -= 1;
+                        navigateToMediaPlayer();
+                    }
+
+                }
+                else if (type.Equals("MusicLibrary"))
+                {
+                    MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
+                    Media previousMedia = musicLibraryVM.getPreviousMedia();
+
+                    if (previousMedia != null)
+                    {
+                        currentMedia = previousMedia;
+                        musicLibraryVM.selectedIndex -= 1;
+                        navigateToMediaPlayer();
+                    }
+                }
+                else
+                {
+                    //Do nothing
                 }
 
-            }
-            else if (type.Equals("MusicLibrary"))
-            {
-                MusicLibraryVM musicLibraryVM = (MusicLibraryVM)prototype_view["MusicLibrary"];
-                Media previousMedia = musicLibraryVM.getPreviousMedia();
-
-                if (previousMedia != null)
-                {
-                    currentMedia = previousMedia;
-                    musicLibraryVM.selectedIndex -= 1;
-                    navigateToMediaPlayer();
-                }
-            }
-            else
-            {
-                //Do nothing
-            }
-
-            this.setInfoFromMedia(currentMedia);
+                this.setInfoFromMedia(currentMedia);
+            }    
         }
 
         void pauseButton_command(Object obj)
         {
-            UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
-            userControl.pauseVideo();
+            if (currentMedia != null)
+            {
+                UserControlVM userControl = (UserControlVM)prototype_view["UserControl"];
+                userControl.pauseVideo();
+            }
         }
 
         //Dùng để set duration được pass từ màn hình Usercontrol1 về
@@ -295,9 +307,6 @@ namespace DemoUI.ViewModel
         {
             this.currentDuration = duration;
         }
-
-
-
     }
 
     public static class ShuffleExtension
